@@ -2,7 +2,7 @@
 
 41 free, browser-based SEO & GEO tools. Static site — no backend, no tracking, nothing to break.
 
-Live: https://spc-serprank.github.io
+Live: https://seoprocheck.github.io
 
 ## Tools
 
