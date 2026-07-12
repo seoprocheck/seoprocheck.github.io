@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JSON Validator &amp; Formatter — Free SEO Tool | SEO ProCheck</title>
+<meta name="description" content="Validate and format JSON.">
+<link rel="canonical" href="https://spc-serprank.github.io/json-validator/">
+<meta property="og:title" content="JSON Validator &amp; Formatter — Free SEO Tool | SEO ProCheck">
+<meta property="og:description" content="Validate and format JSON.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://spc-serprank.github.io/json-validator/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#815be0;--brand2:#7B68EE;--ink:#1d2130;--muted:#5b6472;--bg:#f6f7fb;--card:#fff;--line:#e7e9f2;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.site{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+header.site a{color:#fff}
+.brand{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.brand .dot{width:22px;height:22px;border-radius:6px;background:#fff;color:var(--brand);display:grid;place-items:center;font-weight:800}
+.hero{padding:54px 0 30px}.hero h1{font-size:2rem;margin:0 0 10px}.hero p{color:var(--muted);font-size:1.1rem;max-width:640px;margin:0}
+.search{margin:26px 0 8px}.search input{width:100%;padding:14px 16px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:#fff}
+.cat{margin:34px 0 12px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;transition:.15s;display:block}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(129,91,224,.12);text-decoration:none}
+.card h3{margin:0 0 6px;font-size:1.02rem;color:var(--ink)}
+.card p{margin:0;color:var(--muted);font-size:.9rem}
+.count{color:var(--muted);font-size:.95rem}
+footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;color:var(--muted);font-size:.9rem;text-align:center}
+.crumb{padding:20px 0 0}.crumb a{color:var(--muted);font-size:.9rem}
+.toolhead{padding:16px 0 4px}.toolhead h1{margin:0;font-size:1.6rem}.toolhead p{color:var(--muted);margin:6px 0 0}
+.toolstage{padding:22px 0 10px}
+@media(prefers-color-scheme:dark){
+:root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
+.spc-tool-wrapper{background:#1b1e29 !important;color:#e8eaf2 !important;box-shadow:none !important;border:1px solid #2a2e3d}
+.spc-tool-wrapper label,.spc-tool-wrapper h3,.spc-tool-wrapper p,.spc-tool-wrapper li{color:#e8eaf2 !important}
+.spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
+.spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
+}
+</style>
+<style>.spc-tool-wrapper {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    color: #333333;
+    line-height: 1.6;
+}
+.spc-tool-wrapper * {
+    box-sizing: border-box;
+}
+.spc-tool-wrapper h3 {
+    color: #815be0;
+    font-size: 1.25rem;
+    margin: 0 0 20px 0;
+    font-weight: 600;
+}
+.spc-tool-wrapper label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #333333;
+    font-size: 0.9rem;
+}
+.spc-tool-wrapper input[type="text"],
+.spc-tool-wrapper input[type="url"],
+.spc-tool-wrapper input[type="number"],
+.spc-tool-wrapper input[type="date"],
+.spc-tool-wrapper input[type="time"],
+.spc-tool-wrapper input[type="email"],
+.spc-tool-wrapper textarea,
+.spc-tool-wrapper select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #f8f9fa;
+    color: #333333;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.spc-tool-wrapper input:focus,
+.spc-tool-wrapper textarea:focus,
+.spc-tool-wrapper select:focus {
+    outline: none;
+    border-color: #815be0;
+    box-shadow: 0 0 0 3px rgba(129,91,224,0.15);
+    background: #ffffff;
+}
+.spc-tool-wrapper textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.spc-tool-wrapper button,
+.spc-tool-wrapper .spc-btn {
+    background: linear-gradient(135deg, #815be0 0%, #5890e5 100%);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+}
+.spc-tool-wrapper button:hover,
+.spc-tool-wrapper .spc-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(129,91,224,0.35);
+}
+.spc-tool-wrapper .spc-btn-secondary {
+    background: #f8f9fa;
+    color: #815be0;
+    border: 2px solid #815be0;
+}
+.spc-tool-wrapper .spc-btn-secondary:hover {
+    background: #815be0;
+    color: #ffffff;
+}
+.spc-tool-wrapper .spc-output {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #333333;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.spc-tool-wrapper .spc-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.spc-tool-wrapper .spc-field {
+    margin-bottom: 20px;
+}
+.spc-tool-wrapper .spc-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.spc-tool-wrapper .spc-success {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+.spc-tool-wrapper .spc-error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+.spc-tool-wrapper .spc-info {
+    background: #e7f3ff;
+    color: #0c5460;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 0.85rem;
+}
+.spc-tool-wrapper hr {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 25px 0;
+}
+.spc-tool-wrapper code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.85em;
+}
+.spc-tool-wrapper .spc-preview-box {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+.spc-tool-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.spc-tool-wrapper th,
+.spc-tool-wrapper td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+.spc-tool-wrapper th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333333;
+}
+.spc-tool-wrapper .spc-tag {
+    display: inline-block;
+    background: #815be0;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.spc-tool-wrapper .spc-checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+.spc-tool-wrapper .spc-checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #815be0;
+}</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Validator &amp; Formatter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Validate and format JSON."}</script>
+</head><body>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><span class="dot">S</span> SEO ProCheck Tools</a>
+<a href="https://seoprocheck.com">seoprocheck.com →</a>
+</div></header>
+<div class="wrap crumb"><a href="/">← All tools</a></div>
+<div class="wrap toolhead"><h1>JSON Validator &amp; Formatter</h1><p>Validate and format JSON.</p></div>
+<div class="wrap toolstage">
+<div class="spc-tool-wrapper" id="json-validator">
+<h3>JSON Validator & Formatter</h3>
+<div class="spc-field">
+    <label>Paste JSON</label>
+    <textarea id="json-input" placeholder='{"key": "value"}' style="min-height:200px;font-family:monospace;"></textarea>
+</div>
+<div class="spc-actions">
+    <button onclick="validateJSON()">Validate & Format</button>
+    <button onclick="minifyJSON()">Minify</button>
+    <button class="spc-btn-secondary" onclick="copyJSON()">Copy</button>
+</div>
+<div id="json-status" style="margin-top:15px;"></div>
+<div class="spc-output" id="json-output" style="display:none;"></div>
+</div>
+<script>
+function validateJSON() {
+    const input = document.getElementById('json-input').value;
+    try {
+        const parsed = JSON.parse(input);
+        document.getElementById('json-status').innerHTML = '<div class="spc-success">✅ Valid JSON</div>';
+        document.getElementById('json-output').style.display = 'block';
+        document.getElementById('json-output').textContent = JSON.stringify(parsed, null, 2);
+    } catch(e) {
+        document.getElementById('json-status').innerHTML = `<div class="spc-error">❌ Invalid JSON: ${e.message}</div>`;
+        document.getElementById('json-output').style.display = 'none';
+    }
+}
+function minifyJSON() {
+    const input = document.getElementById('json-input').value;
+    try {
+        const parsed = JSON.parse(input);
+        document.getElementById('json-status').innerHTML = '<div class="spc-success">✅ Minified</div>';
+        document.getElementById('json-output').style.display = 'block';
+        document.getElementById('json-output').textContent = JSON.stringify(parsed);
+    } catch(e) {
+        document.getElementById('json-status').innerHTML = `<div class="spc-error">❌ Invalid JSON: ${e.message}</div>`;
+    }
+}
+function copyJSON() {
+    navigator.clipboard.writeText(document.getElementById('json-output').textContent);
+    alert('Copied!');
+}
+</script>
+</div>
+<footer class="site"><div class="wrap">
+Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> · Runs entirely in your browser · No sign-up
+</div></footer>
+</body></html>
