@@ -244,50 +244,166 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="wrap toolstage">
 <div class="spc-tool-wrapper" id="ai-crawler">
 <h3>AI Crawler Checker</h3>
-<p style="color:#666;font-size:0.9rem;margin-bottom:20px;">Check if your robots.txt allows major AI crawlers.</p>
+<p style="color:#666;font-size:0.9rem;margin-bottom:20px;">Which of 27 AI crawlers can access your site? Fetches your robots.txt live and evaluates the <em>real</em> matching rules (per-agent groups, wildcards, longest match) — same engine as our <a href="https://github.com/seoprocheck/ai-crawler-audit" style="color:#815be0;">ai-crawler-audit CLI</a>.</p>
 <div class="spc-field">
-    <label>Paste your robots.txt content</label>
-    <textarea id="robots-content" placeholder="User-agent: *
-Disallow: /admin/
-..." style="min-height:200px;font-family:monospace;"></textarea>
+    <label>Domain or URL</label>
+    <input type="url" id="ai-domain" placeholder="example.com">
 </div>
 <div class="spc-actions">
-    <button onclick="checkAICrawlers()">Check AI Crawler Access</button>
+    <button onclick="fetchAndCheck()">Fetch robots.txt &amp; Check</button>
 </div>
-<div id="crawler-results" style="margin-top:20px;"></div>
+<div class="spc-field" style="margin-top:18px;">
+    <label>Or paste robots.txt content</label>
+    <textarea id="robots-content" rows="8" placeholder="User-agent: GPTBot&#10;Disallow: /&#10;&#10;User-agent: *&#10;Disallow: /admin/"></textarea>
+</div>
+<div class="spc-actions">
+    <button onclick="checkAICrawlers()">Check Pasted robots.txt</button>
+</div>
+<div id="ai-results" style="margin-top:20px;"></div>
 </div>
 <script>
-const aiCrawlers = [
-    {name: 'GPTBot', owner: 'OpenAI (ChatGPT)', critical: true},
-    {name: 'ChatGPT-User', owner: 'OpenAI (ChatGPT browsing)', critical: true},
-    {name: 'OAI-SearchBot', owner: 'OpenAI Search', critical: true},
-    {name: 'Google-Extended', owner: 'Google (Gemini/Bard training)', critical: false},
-    {name: 'Googlebot', owner: 'Google Search & AI Overviews', critical: true},
-    {name: 'anthropic-ai', owner: 'Anthropic (Claude)', critical: true},
-    {name: 'ClaudeBot', owner: 'Anthropic (Claude)', critical: true},
-    {name: 'Claude-Web', owner: 'Anthropic (Claude web)', critical: true},
-    {name: 'PerplexityBot', owner: 'Perplexity AI', critical: true},
-    {name: 'Bytespider', owner: 'ByteDance (TikTok)', critical: false},
-    {name: 'CCBot', owner: 'Common Crawl', critical: false},
-    {name: 'cohere-ai', owner: 'Cohere', critical: false}
+
+function escH(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('timed out after '+ms/1000+'s')),ms))]);}
+async function proxyFetch(url){
+  const tries=[
+    'https://corsproxy.io/?url='+encodeURIComponent(url),
+    'https://api.allorigins.win/raw?url='+encodeURIComponent(url)
+  ];
+  let lastErr;
+  for(const u of tries){
+    try{
+      const r=await withTimeout(fetch(u),9000);
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r;
+    }catch(e){lastErr=e;}
+  }
+  throw lastErr||new Error('all proxies failed');
+}
+function normUrl(u){u=u.trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;return u;}
+
+const AI_CRAWLERS=[
+ ['GPTBot','OpenAI','training'],['OAI-SearchBot','OpenAI','ai-search'],['ChatGPT-User','OpenAI','assistant-fetch'],
+ ['ClaudeBot','Anthropic','training'],['anthropic-ai','Anthropic','training'],['Claude-Web','Anthropic','assistant-fetch'],
+ ['Claude-User','Anthropic','assistant-fetch'],['Claude-SearchBot','Anthropic','ai-search'],
+ ['Google-Extended','Google','training'],['PerplexityBot','Perplexity','ai-search'],['Perplexity-User','Perplexity','assistant-fetch'],
+ ['CCBot','Common Crawl','training'],['Bytespider','ByteDance','training'],['Amazonbot','Amazon','assistant-fetch'],
+ ['Applebot-Extended','Apple','training'],['Meta-ExternalAgent','Meta','training'],['Meta-ExternalFetcher','Meta','assistant-fetch'],
+ ['cohere-ai','Cohere','training'],['Diffbot','Diffbot','training'],['YouBot','You.com','ai-search'],
+ ['DuckAssistBot','DuckDuckGo','assistant-fetch'],['ImagesiftBot','ImageSift','training'],['Timpibot','Timpi','training'],
+ ['AI2Bot','Allen AI','training'],['Kangaroo Bot','Kangaroo','training'],['PanguBot','Huawei','training'],['Webzio-Extended','Webz.io','training']
 ];
-function checkAICrawlers() {
-    const content = document.getElementById('robots-content').value.toLowerCase();
-    let html = '<table><tr><th>Crawler</th><th>Owner</th><th>Status</th></tr>';
-    aiCrawlers.forEach(c => {
-        const blocked = content.includes('user-agent: ' + c.name.toLowerCase()) && 
-                       (content.includes('disallow: /') || content.includes('disallow: *'));
-        const wildcardBlock = content.includes('user-agent: *') && content.match(/disallow:\s*\/\s*$/m);
-        const isBlocked = blocked || (wildcardBlock && !content.includes('user-agent: ' + c.name.toLowerCase()));
-        const status = isBlocked ? 
-            '<span style="color:#dc3545;">❌ Blocked</span>' : 
-            '<span style="color:#28a745;">✅ Allowed</span>';
-        const critical = c.critical ? ' <span class="spc-tag">Critical</span>' : '';
-        html += `<tr><td>${c.name}${critical}</td><td>${c.owner}</td><td>${status}</td></tr>`;
+const PURPOSE_LABEL={'training':'Model training','ai-search':'AI search / citations','assistant-fetch':'Assistant live-fetch'};
+function parseRobots(text){
+  const groups=[];let cur=null,expecting=false;
+  text.split(/\r?\n/).forEach(raw=>{
+    const line=raw.split('#')[0].trim();
+    if(!line||line.indexOf(':')<0)return;
+    const i=line.indexOf(':');
+    const field=line.slice(0,i).trim().toLowerCase();
+    const value=line.slice(i+1).trim();
+    if(field==='user-agent'){
+      if(cur===null||!expecting){cur={agents:[],rules:[]};groups.push(cur);}
+      cur.agents.push(value);expecting=true;
+    }else if(field==='allow'||field==='disallow'){
+      if(cur===null){cur={agents:['*'],rules:[]};groups.push(cur);}
+      cur.rules.push([field,value]);expecting=false;
+    }else{expecting=false;}
+  });
+  return groups;
+}
+function patternMatch(path,pattern){
+  if(pattern==='')return false;
+  let anchored=pattern.endsWith('$');
+  if(anchored)pattern=pattern.slice(0,-1);
+  const parts=pattern.split('*');
+  if(!path.startsWith(parts[0]))return false;
+  let pos=parts[0].length;
+  for(let i=1;i<parts.length;i++){
+    const seg=parts[i];
+    if(seg===''){continue;}
+    const idx=path.indexOf(seg,pos);
+    if(idx<0)return false;
+    pos=idx+seg.length;
+  }
+  if(anchored){
+    if(parts[parts.length-1]==='')return true;
+    return pos===path.length;
+  }
+  return true;
+}
+function selectGroup(groups,token){
+  const t=token.toLowerCase();let exact=null,star=null;
+  groups.forEach(g=>g.agents.forEach(a=>{
+    const al=a.toLowerCase();
+    if(al===t)exact=g;else if(al==='*')star=g;
+  }));
+  return exact||star;
+}
+function evaluateBot(groups,token,path){
+  const g=selectGroup(groups,token);
+  if(!g)return['allowed',false];
+  const explicit=g.agents.some(a=>a.toLowerCase()===token.toLowerCase());
+  let best=null;
+  g.rules.forEach(([rtype,pattern])=>{
+    if(patternMatch(path,pattern)){
+      const len=pattern.replace(/\$$/,'').length;
+      if(best===null||len>best[0]||(len===best[0]&&rtype==='allow'&&best[1]==='disallow'))best=[len,rtype,pattern];
+    }
+  });
+  if(best===null)return['allowed',explicit];
+  return[best[1]==='disallow'?'blocked':'allowed',explicit];
+}
+function renderReport(text,sourceLabel){
+  const groups=parseRobots(text);
+  const path='/';
+  const rows=AI_CRAWLERS.map(([bot,owner,purpose])=>{
+    const[verdict,explicit]=evaluateBot(groups,bot,path);
+    return{bot,owner,purpose,verdict,explicit};
+  });
+  const blocked=rows.filter(r=>r.verdict==='blocked').length;
+  const named=rows.filter(r=>r.explicit).length;
+  const order=['training','ai-search','assistant-fetch'];
+  let html='<div class="spc-preview-box">';
+  if(sourceLabel)html+='<p style="color:#666;font-size:0.85rem;margin-bottom:12px;">Source: '+escH(sourceLabel)+'</p>';
+  order.forEach(p=>{
+    html+='<h4 style="margin:14px 0 8px;">'+PURPOSE_LABEL[p]+'</h4><table><tr><th>Crawler</th><th>Owner</th><th>Status</th></tr>';
+    rows.filter(r=>r.purpose===p).forEach(r=>{
+      const status=r.verdict==='blocked'?'<span style="color:#dc3545;">❌ Blocked</span>':'<span style="color:#28a745;">✅ Allowed</span>';
+      const tag=r.explicit?'':' <span class="spc-tag">not named</span>';
+      html+='<tr><td>'+escH(r.bot)+tag+'</td><td>'+escH(r.owner)+'</td><td>'+status+'</td></tr>';
     });
-    html += '</table>';
-    html += '<div class="spc-info" style="margin-top:20px;"><strong>Note:</strong> Google-Extended only affects Gemini training, not Google Search or AI Overviews. Blocking it does NOT remove you from AI Overviews.</div>';
-    document.getElementById('crawler-results').innerHTML = html;
+    html+='</table>';
+  });
+  html+='<div class="spc-info" style="margin-top:15px;"><strong>'+blocked+'/'+rows.length+' AI crawlers blocked · '+named+' explicitly named ('+Math.round(100*named/rows.length)+'% coverage).</strong>';
+  if(blocked>0&&blocked<rows.length&&named<rows.length){
+    const unnamed=rows.filter(r=>!r.explicit).map(r=>r.bot);
+    html+='<br>⚠️ You address some AI bots but not all — not named: '+escH(unnamed.slice(0,10).join(', '))+(unnamed.length>10?'…':'');
+  }
+  html+='</div></div>';
+  document.getElementById('ai-results').innerHTML=html;
+}
+function checkAICrawlers(){
+  const text=document.getElementById('robots-content').value;
+  if(!text.trim()){document.getElementById('ai-results').innerHTML='<div class="spc-info">Paste robots.txt content above, or use the live fetch.</div>';return;}
+  renderReport(text,'pasted robots.txt');
+}
+async function fetchAndCheck(){
+  const out=document.getElementById('ai-results');
+  let base=normUrl(document.getElementById('ai-domain').value);
+  if(!base){out.innerHTML='<div class="spc-info">Enter a domain first.</div>';return;}
+  let robotsUrl;
+  try{robotsUrl=new URL('/robots.txt',base).href;}catch(e){out.innerHTML='<div class="spc-info">That doesn’t look like a valid domain.</div>';return;}
+  out.innerHTML='<div class="spc-info">Fetching '+escH(robotsUrl)+'… (via public CORS proxy)</div>';
+  try{
+    const r=await proxyFetch(robotsUrl);
+    const text=await withTimeout(r.text(),5000);
+    if(!text.trim()){renderReport('',robotsUrl+' (empty — everything allowed)');return;}
+    document.getElementById('robots-content').value=text.slice(0,20000);
+    renderReport(text,robotsUrl);
+  }catch(e){
+    out.innerHTML='<div class="spc-info">Could not fetch ('+escH(e.message)+'). Open <a href="'+escH(robotsUrl)+'" target="_blank" style="color:#815be0;">'+escH(robotsUrl)+'</a>, copy its contents, and paste above.</div>';
+  }
 }
 </script>
 </div>

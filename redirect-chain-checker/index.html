@@ -242,43 +242,102 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="wrap crumb"><a href="/">← All tools</a></div>
 <div class="wrap toolhead"><h1>Redirect Chain Checker</h1><p>Trace redirect chains and spot wasteful hops.</p></div>
 <div class="wrap toolstage">
-<div class="spc-tool-wrapper" id="redirect-checker">
+<div class="spc-tool-wrapper" id="redirect-chain">
 <h3>Redirect Chain Checker</h3>
-<p style="color:#666;font-size:0.9rem;margin-bottom:20px;">Check for redirect chains and loops. Note: Due to browser security (CORS), this tool provides guidance rather than live testing.</p>
+<p style="color:#666;font-size:0.9rem;margin-bottom:20px;">Trace redirect chains hop by hop. Paste <code>curl -sIL</code> output for the full chain, or run a quick live start→final check.</p>
 <div class="spc-field">
-    <label>URL to Check</label>
-    <input type="url" id="redirect-url" placeholder="https://example.com/old-page">
+    <label>URL</label>
+    <input type="url" id="redirect-url" placeholder="http://example.com/old-page">
 </div>
 <div class="spc-actions">
-    <button onclick="checkRedirect()">Get Checking Instructions</button>
+    <button onclick="liveRedirectCheck()">Quick Live Check</button>
+</div>
+<div class="spc-field" style="margin-top:18px;">
+    <label>Or paste the output of <code>curl -sIL http://example.com/old-page</code> (full hop-by-hop)</label>
+    <textarea id="redirect-paste" rows="9" placeholder="HTTP/1.1 301 Moved Permanently&#10;Location: https://example.com/old-page&#10;&#10;HTTP/2 301&#10;location: https://example.com/new-page/&#10;&#10;HTTP/2 200&#10;content-type: text/html"></textarea>
+</div>
+<div class="spc-actions">
+    <button onclick="analyzeChain()">Analyze Chain</button>
 </div>
 <div id="redirect-results" style="margin-top:20px;"></div>
 </div>
 <script>
-function checkRedirect() {
-    const url = document.getElementById('redirect-url').value;
-    if (!url) { alert('Please enter a URL'); return; }
-    let html = '<div class="spc-preview-box">';
-    html += '<h4 style="color:#333;margin-bottom:15px;">How to Check Redirect Chains</h4>';
-    html += '<p><strong>Option 1: Browser DevTools</strong></p>';
-    html += '<ol style="margin:10px 0 20px 20px;">';
-    html += '<li>Open Chrome DevTools (F12)</li>';
-    html += '<li>Go to Network tab</li>';
-    html += '<li>Check "Preserve log"</li>';
-    html += `<li>Enter: <code>${url}</code></li>`;
-    html += '<li>Look for 301/302 status codes in the list</li>';
-    html += '</ol>';
-    html += '<p><strong>Option 2: Command Line (cURL)</strong></p>';
-    html += `<div class="spc-output" style="margin:10px 0;">curl -I -L "${url}"</div>`;
-    html += '<p><strong>Option 3: Free Online Tools</strong></p>';
-    html += '<ul style="margin:10px 0 0 20px;">';
-    html += '<li><a href="https://httpstatus.io/" target="_blank" style="color:#815be0;">httpstatus.io</a></li>';
-    html += '<li><a href="https://wheregoes.com/" target="_blank" style="color:#815be0;">wheregoes.com</a></li>';
-    html += '<li><a href="https://www.redirect-checker.org/" target="_blank" style="color:#815be0;">redirect-checker.org</a></li>';
-    html += '</ul>';
-    html += '</div>';
-    html += '<div class="spc-info" style="margin-top:15px;"><strong>Best Practice:</strong> Keep redirect chains to a maximum of 1-2 hops. More than 3 redirects can impact page speed and crawl budget.</div>';
-    document.getElementById('redirect-results').innerHTML = html;
+
+function escH(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('timed out after '+ms/1000+'s')),ms))]);}
+async function proxyFetch(url){
+  const tries=[
+    'https://corsproxy.io/?url='+encodeURIComponent(url),
+    'https://api.allorigins.win/raw?url='+encodeURIComponent(url)
+  ];
+  let lastErr;
+  for(const u of tries){
+    try{
+      const r=await withTimeout(fetch(u),9000);
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r;
+    }catch(e){lastErr=e;}
+  }
+  throw lastErr||new Error('all proxies failed');
+}
+function normUrl(u){u=u.trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;return u;}
+
+function analyzeChain(){
+  const raw=document.getElementById('redirect-paste').value;
+  const out=document.getElementById('redirect-results');
+  if(!raw.trim()){out.innerHTML='<div class="spc-info">Paste <code>curl -sIL</code> output above first.</div>';return;}
+  const hops=[];let cur=null;
+  raw.split(/\r?\n/).forEach(l=>{
+    const m=l.match(/^HTTP\/[\d.]+\s+(\d{3})/i);
+    if(m){cur={status:parseInt(m[1],10),location:null};hops.push(cur);return;}
+    const loc=l.match(/^location:\s*(.+)$/i);
+    if(loc&&cur)cur.location=loc[1].trim();
+  });
+  if(!hops.length){out.innerHTML='<div class="spc-info">No HTTP status lines found — paste the raw curl output including the <code>HTTP/…</code> lines.</div>';return;}
+  const redirects=hops.filter(h=>h.status>=300&&h.status<400).length;
+  let html='<div class="spc-preview-box"><table><tr><th>Hop</th><th>Status</th><th>Redirects to</th></tr>';
+  hops.forEach((h,i)=>{
+    const isRed=h.status>=300&&h.status<400;
+    const badge=isRed?'↪️ '+h.status:(h.status<400?'✅ '+h.status:'❌ '+h.status);
+    html+='<tr><td>'+(i+1)+'</td><td>'+badge+'</td><td>'+(h.location?escH(h.location):'— (final)')+'</td></tr>';
+  });
+  html+='</table>';
+  let verdict,cls;
+  if(redirects===0){verdict='No redirects — direct 200. Perfect.';}
+  else if(redirects===1){verdict='1 redirect — fine for permanent moves (make sure it’s a 301).';}
+  else{verdict=redirects+' chained redirects — collapse the chain: every hop costs latency and crawl budget, and equity dilutes.';}
+  html+='<div class="spc-info" style="margin-top:15px;"><strong>Verdict:</strong> '+verdict+'</div>';
+  const finalLoc=hops.filter(h=>h.location).map(h=>h.location).pop();
+  const startUrl=normUrl(document.getElementById('redirect-url').value);
+  if(redirects>1&&finalLoc&&startUrl){
+    try{
+      const sp=new URL(startUrl).pathname;
+      html+='<p style="margin-top:15px;"><strong>Collapse it — ready-to-paste .htaccess rule (start → final):</strong></p>';
+      html+='<div class="spc-output">Redirect 301 '+escH(sp)+' '+escH(finalLoc)+'</div>';
+    }catch(e){}
+  }
+  html+='</div>';
+  out.innerHTML=html;
+}
+async function liveRedirectCheck(){
+  const out=document.getElementById('redirect-results');
+  const url=normUrl(document.getElementById('redirect-url').value);
+  if(!url){out.innerHTML='<div class="spc-info">Enter a URL first.</div>';return;}
+  out.innerHTML='<div class="spc-info">Checking… (routed through a public CORS proxy)</div>';
+  try{
+    const r=await proxyFetch(url);
+    const finalUrl=(r.headers.get('x-final-url')||'').trim();
+    const changed=finalUrl&&finalUrl.replace(/\/$/,'')!==url.replace(/\/$/,'');
+    let html='<div class="spc-preview-box"><table><tr><th>Check</th><th>Result</th></tr>';
+    html+='<tr><td>Start URL</td><td>'+escH(url)+'</td></tr>';
+    html+='<tr><td>Final URL</td><td>'+(finalUrl?escH(finalUrl):'(same or hidden by proxy)')+'</td></tr>';
+    html+='<tr><td>Redirected?</td><td>'+(changed?'↪️ Yes':'✅ No')+'</td></tr>';
+    html+='<tr><td>Final status</td><td>'+(r.status<400?'✅ ':'❌ ')+'HTTP '+r.status+'</td></tr></table>';
+    html+='<div class="spc-info" style="margin-top:15px;">The proxy follows redirects server-side, so hop-by-hop detail isn’t visible here. For the full chain run <span class="spc-output" style="display:inline;padding:2px 8px;">curl -sIL '+escH(url)+'</span> and paste the output above'+(changed?' — this URL does redirect, worth tracing.':'.')+'</div></div>';
+    out.innerHTML=html;
+  }catch(e){
+    out.innerHTML='<div class="spc-info">Live check failed ('+escH(e.message)+'). Run <code>curl -sIL '+escH(url)+'</code> and paste the output above.</div>';
+  }
 }
 </script>
 </div>

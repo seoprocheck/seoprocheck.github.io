@@ -244,45 +244,111 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="wrap toolstage">
 <div class="spc-tool-wrapper" id="http-header">
 <h3>HTTP Header Checker</h3>
-<p style="color:#666;font-size:0.9rem;margin-bottom:20px;">Important HTTP headers for SEO and security.</p>
+<p style="color:#666;font-size:0.9rem;margin-bottom:20px;">Analyze response headers for SEO &amp; security issues. Paste <code>curl -I</code> output for a full graded audit, or run a quick live check.</p>
 <div class="spc-field">
-    <label>URL to Check</label>
+    <label>URL</label>
     <input type="url" id="header-url" placeholder="https://example.com">
 </div>
 <div class="spc-actions">
-    <button onclick="showHeaderGuide()">Show Header Guide</button>
+    <button onclick="quickLiveCheck()">Quick Live Check</button>
+</div>
+<div class="spc-field" style="margin-top:18px;">
+    <label>Or paste headers (output of <code>curl -I https://example.com</code>)</label>
+    <textarea id="header-paste" rows="8" placeholder="HTTP/2 200&#10;content-type: text/html; charset=utf-8&#10;cache-control: max-age=3600&#10;x-robots-tag: index, follow"></textarea>
+</div>
+<div class="spc-actions">
+    <button onclick="analyzeHeaders()">Analyze Headers</button>
 </div>
 <div id="header-results" style="margin-top:20px;"></div>
 </div>
 <script>
-function showHeaderGuide() {
-    const url = document.getElementById('header-url').value || 'https://example.com';
-    let html = '<div class="spc-preview-box">';
-    html += '<h4 style="color:#333;margin-bottom:15px;">Important SEO Headers to Check</h4>';
-    html += '<table><tr><th>Header</th><th>SEO Impact</th><th>Ideal Value</th></tr>';
-    const headers = [
-        ['X-Robots-Tag', 'Controls indexing at server level', 'index, follow (or absent)'],
-        ['Canonical', 'Can set canonical via header', 'Matching page URL'],
-        ['Content-Type', 'Ensures proper rendering', 'text/html; charset=UTF-8'],
-        ['Cache-Control', 'Affects page speed', 'public, max-age=31536000'],
-        ['Content-Encoding', 'Compression status', 'gzip or br'],
-        ['Strict-Transport-Security', 'HTTPS enforcement', 'max-age=31536000'],
-        ['X-Content-Type-Options', 'Security header', 'nosniff'],
-        ['Content-Security-Policy', 'Security header', 'Defined policy']
-    ];
-    headers.forEach(h => {
-        html += `<tr><td><code>${h[0]}</code></td><td>${h[1]}</td><td>${h[2]}</td></tr>`;
-    });
-    html += '</table>';
-    html += '<p style="margin-top:20px;"><strong>Check headers with cURL:</strong></p>';
-    html += `<div class="spc-output">curl -I "${url}"</div>`;
-    html += '<p style="margin-top:15px;"><strong>Online Tools:</strong></p>';
-    html += '<ul style="margin:10px 0 0 20px;">';
-    html += '<li><a href="https://securityheaders.com/" target="_blank" style="color:#815be0;">securityheaders.com</a></li>';
-    html += '<li><a href="https://www.webpagetest.org/" target="_blank" style="color:#815be0;">webpagetest.org</a></li>';
-    html += '</ul>';
-    html += '</div>';
-    document.getElementById('header-results').innerHTML = html;
+
+function escH(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('timed out after '+ms/1000+'s')),ms))]);}
+async function proxyFetch(url){
+  const tries=[
+    'https://corsproxy.io/?url='+encodeURIComponent(url),
+    'https://api.allorigins.win/raw?url='+encodeURIComponent(url)
+  ];
+  let lastErr;
+  for(const u of tries){
+    try{
+      const r=await withTimeout(fetch(u),9000);
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r;
+    }catch(e){lastErr=e;}
+  }
+  throw lastErr||new Error('all proxies failed');
+}
+function normUrl(u){u=u.trim();if(!u)return '';if(!/^https?:\/\//i.test(u))u='https://'+u;return u;}
+
+const HDR_CHECKS=[
+ {h:'x-robots-tag',eval:v=>{if(v===null)return['ok','Not set — page-level meta robots applies'];if(/noindex|none/i.test(v))return['bad','Contains noindex — this URL is blocked from indexing'];return['ok',escH(v)];}},
+ {h:'content-type',eval:v=>{if(v===null)return['warn','Missing — browsers must guess the type'];if(!/charset/i.test(v))return['warn',escH(v)+' — no charset declared'];return['ok',escH(v)];}},
+ {h:'cache-control',eval:v=>{if(v===null)return['warn','Missing — repeat visits refetch everything'];if(/no-store|no-cache/i.test(v))return['warn',escH(v)+' — nothing cached; deliberate?'];return['ok',escH(v)];}},
+ {h:'content-encoding',eval:v=>{if(v===null)return['warn','No compression visible (curl -I may omit it; try curl -I --compressed)'];return['ok',escH(v)];}},
+ {h:'strict-transport-security',eval:v=>v===null?['warn','Missing — HTTPS not enforced by HSTS']:['ok',escH(v)]},
+ {h:'x-content-type-options',eval:v=>v===null?['warn','Missing — add nosniff']:['ok',escH(v)]},
+ {h:'link',eval:v=>{if(v===null)return['ok','Not set'];if(/rel="?canonical"?/i.test(v))return['ok','Canonical via header: '+escH(v)];return['ok',escH(v)];}},
+ {h:'vary',eval:v=>{if(v===null)return['ok','Not set'];if(/user-agent/i.test(v))return['warn',escH(v)+' — Vary: User-Agent can fragment caches'];return['ok',escH(v)];}}
+];
+function parseHeaderBlock(text){
+  const lines=text.split(/\r?\n/).map(l=>l.trim());
+  let status=null;const map={};
+  for(const l of lines){
+    if(!l)continue;
+    const m=l.match(/^HTTP\/[\d.]+\s+(\d{3})/i);
+    if(m){status=parseInt(m[1],10);continue;}
+    const i=l.indexOf(':');
+    if(i>0){map[l.slice(0,i).trim().toLowerCase()]=l.slice(i+1).trim();}
+  }
+  return {status,map};
+}
+function analyzeHeaders(){
+  const raw=document.getElementById('header-paste').value;
+  const out=document.getElementById('header-results');
+  if(!raw.trim()){out.innerHTML='<div class="spc-info">Paste the output of <code>curl -I yoururl</code> above first.</div>';return;}
+  const {status,map}=parseHeaderBlock(raw);
+  const icon={ok:'✅',warn:'⚠️',bad:'❌'};
+  let html='<div class="spc-preview-box">';
+  if(status!==null){
+    const sClass=status<300?'ok':(status<400?'warn':'bad');
+    html+='<p style="margin-bottom:12px;"><strong>Status:</strong> '+icon[sClass]+' HTTP '+status+'</p>';
+  }
+  html+='<table><tr><th>Header</th><th>Verdict</th></tr>';
+  let warns=0,bads=0;
+  HDR_CHECKS.forEach(c=>{
+    const v=(c.h in map)?map[c.h]:null;
+    const [cls,msg]=c.eval(v);
+    if(cls==='warn')warns++;if(cls==='bad')bads++;
+    html+='<tr><td><code>'+c.h+'</code></td><td>'+icon[cls]+' '+msg+'</td></tr>';
+  });
+  const known=new Set(HDR_CHECKS.map(c=>c.h));
+  const extras=Object.keys(map).filter(k=>!known.has(k));
+  html+='</table>';
+  if(extras.length)html+='<p style="margin-top:12px;color:#666;font-size:0.85rem;">Also present: '+extras.map(escH).join(', ')+'</p>';
+  html+='<div class="spc-info" style="margin-top:15px;"><strong>Result:</strong> '+(bads?bads+' blocking issue(s), ':'')+warns+' warning(s) across '+HDR_CHECKS.length+' SEO-relevant headers.</div>';
+  html+='</div>';
+  out.innerHTML=html;
+}
+async function quickLiveCheck(){
+  const out=document.getElementById('header-results');
+  const url=normUrl(document.getElementById('header-url').value);
+  if(!url){out.innerHTML='<div class="spc-info">Enter a URL first.</div>';return;}
+  out.innerHTML='<div class="spc-info">Checking… (routed through a public CORS proxy)</div>';
+  try{
+    const r=await proxyFetch(url);
+    const finalUrl=r.headers.get('x-final-url')||url;
+    const ct=r.headers.get('content-type')||'(hidden by proxy)';
+    let html='<div class="spc-preview-box"><table><tr><th>Check</th><th>Result</th></tr>';
+    html+='<tr><td>Reachable</td><td>✅ HTTP '+r.status+'</td></tr>';
+    html+='<tr><td>Final URL</td><td>'+escH(finalUrl)+(finalUrl.replace(/\/$/,'')!==url.replace(/\/$/,'')?' ⚠️ (redirected)':' ✅')+'</td></tr>';
+    html+='<tr><td>Content-Type</td><td>'+escH(ct)+'</td></tr></table>';
+    html+='<div class="spc-info" style="margin-top:15px;">Browsers can’t read most cross-origin headers, so the live check is limited. For the full graded audit run <span class="spc-output" style="display:inline;padding:2px 8px;">curl -I '+escH(url)+'</span> and paste the output above.</div></div>';
+    out.innerHTML=html;
+  }catch(e){
+    out.innerHTML='<div class="spc-info">Live check failed ('+escH(e.message)+'). Run <code>curl -I '+escH(url)+'</code> and paste the output above for the full analysis.</div>';
+  }
 }
 </script>
 </div>
