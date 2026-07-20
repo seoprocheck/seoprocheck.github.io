@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Command Line — 15 free tools | SEO ProCheck</title>
+<meta name="description" content="Zero-dependency Python CLIs for the work a browser tool cannot do — crawling a whole site, reading server logs, diffing you against competitors. No API keys, no install beyond Python 3.8.">
+<link rel="canonical" href="https://seoprocheck.github.io/command-line/">
+<meta property="og:title" content="Command Line — 15 free tools | SEO ProCheck">
+<meta property="og:description" content="Zero-dependency Python CLIs for the work a browser tool cannot do — crawling a whole site, reading server logs, diffing you against competitors. No API keys, no install beyond Python 3.8.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://seoprocheck.github.io/command-line/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#815be0;--brand2:#7B68EE;--ink:#1d2130;--muted:#5b6472;--bg:#f6f7fb;--card:#fff;--line:#e7e9f2;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.site{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+header.site a{color:#fff}
+.brand{font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+.brand .dot{width:22px;height:22px;border-radius:6px;background:#fff;color:var(--brand);display:grid;place-items:center;font-weight:800}
+.hero{padding:54px 0 30px}.hero h1{font-size:2rem;margin:0 0 10px}.hero p{color:var(--muted);font-size:1.1rem;max-width:680px;margin:0}
+.search{margin:26px 0 8px}.search input{width:100%;padding:14px 16px;font-size:1rem;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.cat{margin:34px 0 12px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cat a{font-size:.78rem;letter-spacing:.04em;text-transform:none;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;transition:.15s;display:block}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(129,91,224,.12);text-decoration:none}
+.card h3{margin:0 0 6px;font-size:1.02rem;color:var(--ink)}
+.card p{margin:0;color:var(--muted);font-size:.9rem}
+.card .tag{display:inline-block;margin-top:10px;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--brand);border:1px solid var(--line);border-radius:20px;padding:2px 9px}
+.count{color:var(--muted);font-size:.95rem}
+.cats-nav{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0}
+.cats-nav a{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-size:.88rem;color:var(--ink)}
+.cats-nav a:hover{border-color:var(--brand);color:var(--brand);text-decoration:none}
+.cats-nav a[aria-current]{background:var(--brand);color:#fff;border-color:var(--brand)}
+footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;color:var(--muted);font-size:.9rem;text-align:center}
+.crumb{padding:20px 0 0}.crumb a{color:var(--muted);font-size:.9rem}
+.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:0 10px 10px 0;padding:14px 18px;margin:22px 0 0;color:var(--muted);font-size:.92rem}
+@media(prefers-color-scheme:dark){
+:root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
+}
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="brand" href="/"><span class="dot">S</span> SEO ProCheck Tools</a>
+<a href="https://seoprocheck.com">seoprocheck.com &rarr;</a>
+</div></header>
+
+<div class="wrap crumb"><a href="/">&larr; All tools</a></div>
+<div class="wrap hero" style="padding-top:22px">
+<h1>⌨️ Command Line</h1>
+<p>Zero-dependency Python CLIs for the work a browser tool cannot do — crawling a whole site, reading server logs, diffing you against competitors. No API keys, no install beyond Python 3.8.</p>
+<div class="cats-nav"><a href="/">All tools</a><a href="/schema/">🧩 Schema &amp; Structured Data</a><a href="/geo-ai/">🤖 GEO &amp; AI Visibility</a><a href="/technical/">⚙️ Technical SEO</a><a href="/content/">📝 Content Analysis</a><a href="/local/">📍 Local SEO</a><a href="/social-meta/">🔗 Social &amp; Meta</a><a href="/utilities/">🛠️ Developer Utilities</a><a href="/command-line/" aria-current="page">⌨️ Command Line</a></div>
+</div>
+<div class="wrap"><div class="note">These are Python scripts, not web apps — they crawl sites, read exports and hit APIs, which a browser cannot do safely. Each is a single file with no dependencies: clone it and run it with Python 3.8 or newer. Every one ships a <code>--selftest</code> flag and a bundled fixture so you can see it work before pointing it at anything real.</div></div>
+<div class="wrap" style="padding-top:22px"><div class="grid">
+<a class="card" href="https://github.com/seoprocheck/thin-content-enrich" target="_blank" rel="noopener" data-name="thin content enrich find thin &amp; near-duplicate pages, then get told what to add — never what to delete."><h3>Thin Content Enrich</h3><p>Find thin &amp; near-duplicate pages, then get told what to add — never what to delete.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/content-brief-builder" target="_blank" rel="noopener" data-name="content brief builder turn the pages already ranking into a brief: table stakes vs coverage gaps."><h3>Content Brief Builder</h3><p>Turn the pages already ranking into a brief: table stakes vs coverage gaps.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/answer-block-auditor" target="_blank" rel="noopener" data-name="answer block auditor can an ai lift an answer off your page? scores answer proximity and extractability."><h3>Answer Block Auditor</h3><p>Can an AI lift an answer off your page? Scores answer proximity and extractability.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/internal-link-opportunities" target="_blank" rel="noopener" data-name="internal link opportunities find pages that discuss another page&#x27;s subject without linking — with the sentence to link from."><h3>Internal Link Opportunities</h3><p>Find pages that discuss another page&#x27;s subject without linking — with the sentence to link from.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/content-decay" target="_blank" rel="noopener" data-name="content decay find pages bleeding search traffic in gsc exports, ranked with enrich-first fixes."><h3>Content Decay</h3><p>Find pages bleeding search traffic in GSC exports, ranked with enrich-first fixes.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/cannibalization-map" target="_blank" rel="noopener" data-name="cannibalization map find urls competing for the same query in gsc data, severity-scored."><h3>Cannibalization Map</h3><p>Find URLs competing for the same query in GSC data, severity-scored.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/reddit-voc" target="_blank" rel="noopener" data-name="reddit voc voice-of-customer mining for any subreddit — share of voice, complaints, the venue gap."><h3>Reddit VoC</h3><p>Voice-of-customer mining for any subreddit — share of voice, complaints, the venue gap.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/log-crawl-analyzer" target="_blank" rel="noopener" data-name="log crawl analyzer crawl-budget analysis from server logs, per bot, including ai crawlers."><h3>Log Crawl Analyzer</h3><p>Crawl-budget analysis from server logs, per bot, including AI crawlers.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/redirect-chain-fixer" target="_blank" rel="noopener" data-name="redirect chain fixer find redirect chains and loops, then emit the rules that collapse them."><h3>Redirect Chain Fixer</h3><p>Find redirect chains and loops, then emit the rules that collapse them.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/hreflang-check" target="_blank" rel="noopener" data-name="hreflang check catch the missing return tag that kills international rankings."><h3>Hreflang Check</h3><p>Catch the missing return tag that kills international rankings.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/cwv-field-vs-lab" target="_blank" rel="noopener" data-name="cwv field vs lab core web vitals: crux field data against lighthouse lab, with the likely reason they diverge."><h3>CWV Field vs Lab</h3><p>Core Web Vitals: CrUX field data against Lighthouse lab, with the likely reason they diverge.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/bulk-schema-validator" target="_blank" rel="noopener" data-name="bulk schema validator validate json-ld across a whole sitemap — 17 rich-result types, ci-ready."><h3>Bulk Schema Validator</h3><p>Validate JSON-LD across a whole sitemap — 17 rich-result types, CI-ready.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/schema-gap" target="_blank" rel="noopener" data-name="schema gap see what schema types the pages outranking you ship that you don&#x27;t."><h3>Schema Gap</h3><p>See what schema types the pages outranking you ship that you don&#x27;t.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/llms-txt-kit" target="_blank" rel="noopener" data-name="llms.txt kit validate and generate llms.txt, the markdown map that tells ai models what your site is."><h3>llms.txt Kit</h3><p>Validate and generate llms.txt, the Markdown map that tells AI models what your site is.</p><span class="tag">CLI</span></a>
+<a class="card" href="https://github.com/seoprocheck/ai-crawler-audit" target="_blank" rel="noopener" data-name="ai crawler audit audit robots.txt for ai crawler policy — which of 27 ai bots you actually allow."><h3>AI Crawler Audit</h3><p>Audit robots.txt for AI crawler policy — which of 27 AI bots you actually allow.</p><span class="tag">CLI</span></a>
+</div></div>
+<footer class="site"><div class="wrap">
+Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> &middot; Browser tools run entirely on your machine &middot; No sign-up
+</div></footer>
+</body></html>
