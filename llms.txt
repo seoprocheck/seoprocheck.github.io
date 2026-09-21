@@ -1,0 +1,66 @@
+# SEO ProCheck Tools
+
+> Free browser-based and command-line SEO and GEO tools, published by SEO ProCheck (https://seoprocheck.com/). Browser tools run entirely in the visitor's browser: nothing is uploaded, no sign-up, no API keys.
+
+Publisher: SEO ProCheck, https://seoprocheck.com/
+Research and guides behind these tools: https://seoprocheck.com/research/
+Tool list on the main site: https://seoprocheck.com/tools/
+
+## Tools
+
+- [Schema Markup Generator](https://seoprocheck.github.io/schema-markup-generator/): Generate valid JSON-LD schema markup for Articles, Products, Local Business and more.
+- [FAQ Schema Generator](https://seoprocheck.github.io/faq-schema-generator/): Build FAQPage JSON-LD from your questions and answers in seconds.
+- [HowTo Schema Generator](https://seoprocheck.github.io/howto-schema-generator/): Create HowTo structured data with ordered steps, ready to paste.
+- [Breadcrumb Schema Generator](https://seoprocheck.github.io/breadcrumb-schema-generator/): Generate BreadcrumbList JSON-LD for cleaner SERP breadcrumbs.
+- [Video Schema Generator](https://seoprocheck.github.io/video-schema-generator/): Produce VideoObject schema so your videos qualify for rich results.
+- [Event Schema Generator](https://seoprocheck.github.io/event-schema-generator/): Generate Event schema with dates, venue and ticket info.
+- [AI Crawler Checker](https://seoprocheck.github.io/ai-crawler-checker/): Check whether AI crawlers (GPTBot, ClaudeBot, PerplexityBot…) can access your site.
+- [LLMs.txt Generator](https://seoprocheck.github.io/llms-txt-generator/): Generate an llms.txt file to guide AI models around your site.
+- [Citation Formatter](https://seoprocheck.github.io/citation-formatter/): Format citations cleanly for reference and E-E-A-T signals.
+- [Entity Clarity Checker](https://seoprocheck.github.io/entity-clarity-checker/): Check how clearly your content defines its core entities.
+- [AI Content Readiness Checker](https://seoprocheck.github.io/ai-content-readiness/): AI Content Readiness Checker — a free SEO ProCheck tool.
+- [Robots.txt Generator](https://seoprocheck.github.io/robots-txt-generator/): Generate a correct robots.txt with crawl rules and sitemap.
+- [Hreflang Tag Generator](https://seoprocheck.github.io/hreflang-generator/): Generate hreflang tags for multi-language / multi-region pages.
+- [Canonical Tag Generator](https://seoprocheck.github.io/canonical-tag-generator/): Create canonical link tags to prevent duplicate-content issues.
+- [Meta Robots Tag Generator](https://seoprocheck.github.io/meta-robots-generator/): Build meta robots directives (index/follow, max-snippet…).
+- [XML Sitemap Generator](https://seoprocheck.github.io/xml-sitemap-generator/): Generate an XML sitemap from your list of URLs.
+- [Htaccess Redirect Generator](https://seoprocheck.github.io/htaccess-redirect-generator/): Build .htaccess 301/302 redirect rules.
+- [Redirect Chain Checker](https://seoprocheck.github.io/redirect-chain-checker/): Trace redirect chains and spot wasteful hops.
+- [HTTP Header Checker](https://seoprocheck.github.io/http-header-checker/): Inspect a URL&#x27;s HTTP response headers.
+- [SERP Preview Tool](https://seoprocheck.github.io/serp-preview-tool/): Preview how your page looks in Google search results.
+- [Word Counter](https://seoprocheck.github.io/word-counter/): Count words, characters, sentences and reading time.
+- [Keyword Density Checker](https://seoprocheck.github.io/keyword-density-checker/): Measure keyword density and spot over-optimization.
+- [Heading Structure Analyzer](https://seoprocheck.github.io/heading-analyzer/): Analyze your H1–H6 structure for hierarchy issues.
+- [Reading Level Checker](https://seoprocheck.github.io/reading-level-checker/): Assess readability / reading grade level of your text.
+- [Content Gap Finder](https://seoprocheck.github.io/content-gap-finder/): Spot topical gaps against target keywords.
+- [Google Review Link Generator](https://seoprocheck.github.io/google-review-link-generator/): Create a direct Google review link for your business.
+- [NAP Consistency Checker](https://seoprocheck.github.io/nap-consistency-checker/): Check Name/Address/Phone consistency for local SEO.
+- [Local Business Schema Generator](https://seoprocheck.github.io/local-business-schema-generator/): Build LocalBusiness schema with NAP, hours and geo data.
+- [Open Graph Generator](https://seoprocheck.github.io/open-graph-generator/): Build Open Graph tags for rich social sharing.
+- [Twitter Card Generator](https://seoprocheck.github.io/twitter-card-generator/): Generate Twitter/X Card markup.
+- [Meta Tags Generator](https://seoprocheck.github.io/meta-tags-generator/): Generate title, description and meta tags for any page.
+- [Social Media Preview](https://seoprocheck.github.io/social-preview-tool/): Preview how your link renders across social platforms.
+- [Base64 Encoder/Decoder](https://seoprocheck.github.io/base64-encoder-decoder/): Encode or decode Base64 strings.
+- [URL Encoder/Decoder](https://seoprocheck.github.io/url-encoder-decoder/): Encode or decode URLs safely.
+- [URL Slug Generator](https://seoprocheck.github.io/slug-generator/): Turn any title into a clean, SEO-friendly URL slug.
+- [Lorem Ipsum Generator](https://seoprocheck.github.io/lorem-ipsum-generator/): Generate placeholder text for mockups.
+- [Timestamp Converter](https://seoprocheck.github.io/timestamp-converter/): Convert between Unix timestamps and human dates.
+- [JSON Validator &amp; Formatter](https://seoprocheck.github.io/json-validator/): Validate and format JSON.
+- [UTM Parameter Builder](https://seoprocheck.github.io/utm-builder/): Build UTM-tagged campaign URLs for analytics.
+- [HTML Entity Converter](https://seoprocheck.github.io/html-entity-converter/): Convert characters to/from HTML entities.
+- [Regex Tester](https://seoprocheck.github.io/regex-tester/): Test regular expressions against sample text live.
+- [Thin Content Enrich](https://github.com/seoprocheck/thin-content-enrich): Find thin & near-duplicate pages, then get told what to add — never what to delete.
+- [Content Brief Builder](https://github.com/seoprocheck/content-brief-builder): Turn the pages already ranking into a brief: table stakes vs coverage gaps.
+- [Answer Block Auditor](https://github.com/seoprocheck/answer-block-auditor): Can an AI lift an answer off your page? Scores answer proximity and extractability.
+- [Internal Link Opportunities](https://github.com/seoprocheck/internal-link-opportunities): Find pages that discuss another page's subject without linking — with the sentence to link from.
+- [Content Decay](https://github.com/seoprocheck/content-decay): Find pages bleeding search traffic in GSC exports, ranked with enrich-first fixes.
+- [Cannibalization Map](https://github.com/seoprocheck/cannibalization-map): Find URLs competing for the same query in GSC data, severity-scored.
+- [Reddit VoC](https://github.com/seoprocheck/reddit-voc): Voice-of-customer mining for any subreddit — share of voice, complaints, the venue gap.
+- [Log Crawl Analyzer](https://github.com/seoprocheck/log-crawl-analyzer): Crawl-budget analysis from server logs, per bot, including AI crawlers.
+- [Redirect Chain Fixer](https://github.com/seoprocheck/redirect-chain-fixer): Find redirect chains and loops, then emit the rules that collapse them.
+- [Hreflang Check](https://github.com/seoprocheck/hreflang-check): Catch the missing return tag that kills international rankings.
+- [CWV Field vs Lab](https://github.com/seoprocheck/cwv-field-vs-lab): Core Web Vitals: CrUX field data against Lighthouse lab, with the likely reason they diverge.
+- [Bulk Schema Validator](https://github.com/seoprocheck/bulk-schema-validator): Validate JSON-LD across a whole sitemap — 17 rich-result types, CI-ready.
+- [Schema Gap](https://github.com/seoprocheck/schema-gap): See what schema types the pages outranking you ship that you don't.
+- [llms.txt Kit](https://github.com/seoprocheck/llms-txt-kit): Validate and generate llms.txt, the Markdown map that tells AI models what your site is.
+- [AI Crawler Audit](https://github.com/seoprocheck/ai-crawler-audit): Audit robots.txt for AI crawler policy — which of 27 AI bots you actually allow.
