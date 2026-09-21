@@ -266,7 +266,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 </div>
 <script>
 const schemaFields = {
-    Article: ['headline', 'author', 'datePublished', 'image', 'description'],
+    Article: ['headline', 'author', 'publisher', 'datePublished', 'image', 'description'],
     LocalBusiness: ['name', 'address', 'telephone', 'openingHours', 'priceRange'],
     Product: ['name', 'description', 'brand', 'price', 'currency', 'availability'],
     Organization: ['name', 'url', 'logo', 'description', 'email'],
@@ -303,16 +303,17 @@ function generateSchema() {
     if (type === 'Article' && schema.author) {
         schema.author = {"@type": "Person", "name": schema.author};
     }
-    if (type === 'Article' && schema.publisher === undefined) {
-        // publisher is required for Article rich results
-        schema.publisher = {"@type": "Organization", "name": val('headline') ? (val('publisher') || 'Your organisation name') : 'Your organisation name'};
+    if (type === 'Article' && schema.publisher) {
+        schema.publisher = {"@type": "Organization", "name": schema.publisher};
     }
     const output = document.getElementById('schema-output');
     output.style.display = 'block';
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 function copySchema() {
-    navigator.clipboard.writeText(document.getElementById('schema-output').textContent);
+    const copied = document.getElementById('schema-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 updateSchemaFields();

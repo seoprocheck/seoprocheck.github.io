@@ -275,6 +275,10 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
         <label>Site Name</label>
         <input type="text" id="og-site" placeholder="Your Site Name">
     </div>
+<div class="spc-field">
+    <label>Locale (optional, e.g. en_US, fr_FR)</label>
+    <input type="text" id="og-locale" placeholder="en_US">
+</div>
 </div>
 <div class="spc-actions">
     <button onclick="generateOG()">Generate Tags</button>
@@ -296,12 +300,15 @@ function generateOG() {
     if (image) tags += `<meta property="og:image" content="${attrEsc(image)}" />\n`;
     const site = document.getElementById('og-site').value;
     if (site) tags += `<meta property="og:site_name" content="${attrEsc(site)}" />\n`;
-    tags += '<meta property="og:locale" content="en_US" />\n';
+    const locale = (document.getElementById('og-locale') || {}).value || '';
+    if (locale.trim()) tags += `<meta property="og:locale" content="${attrEsc(locale.trim())}" />\n`;
     document.getElementById('og-output').style.display = 'block';
     document.getElementById('og-output').textContent = tags;
 }
 function copyOG() {
-    navigator.clipboard.writeText(document.getElementById('og-output').textContent);
+    const copied = document.getElementById('og-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

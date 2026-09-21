@@ -283,7 +283,9 @@ function generateReviewLink() {
 function copyReviewLink() {
     const link = document.getElementById('review-link').value;
     if (link) {
-        navigator.clipboard.writeText(link);
+        const copied = link;
+        if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+        navigator.clipboard.writeText(copied);
         alert('Copied!');
     }
 }

@@ -266,6 +266,10 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
     <input type="url" id="tc-image" placeholder="https://example.com/image.jpg">
 </div>
 <div class="spc-field">
+    <label>Image alt text</label>
+    <input type="text" id="tc-image-alt" placeholder="What the image shows, for people who cannot see it">
+</div>
+<div class="spc-field">
     <label>Twitter @username (optional)</label>
     <input type="text" id="tc-site" placeholder="@yourusername">
 </div>
@@ -282,12 +286,14 @@ function attrEsc(s) {
 function generateTwitterCard() {
     let tags = '<!-- Twitter Card Meta Tags -->\n';
     tags += `<meta name="twitter:card" content="${attrEsc(document.getElementById('tc-type').value)}" />\n`;
-    tags += `<meta name="twitter:title" content="${attrEsc(document.getElementById('tc-title').value)}" />\n`;
-    tags += `<meta name="twitter:description" content="${attrEsc(document.getElementById('tc-desc').value)}" />\n`;
+    const tTitle = document.getElementById('tc-title').value.trim(), tDesc = document.getElementById('tc-desc').value.trim();
+    if (tTitle) tags += `<meta name="twitter:title" content="${attrEsc(tTitle)}" />\n`;
+    if (tDesc) tags += `<meta name="twitter:description" content="${attrEsc(tDesc)}" />\n`;
     const image = document.getElementById('tc-image').value;
     if (image) {
         tags += `<meta name="twitter:image" content="${attrEsc(image)}" />\n`;
-        tags += '<meta name="twitter:image:alt" content="Describe the image here" />\n';
+        const alt = (document.getElementById('tc-image-alt') || {}).value || '';
+        if (alt.trim()) tags += `<meta name="twitter:image:alt" content="${attrEsc(alt.trim())}" />\n`;
     }
     const site = document.getElementById('tc-site').value;
     if (site) tags += `<meta name="twitter:site" content="${attrEsc(site)}" />\n`;
@@ -295,7 +301,9 @@ function generateTwitterCard() {
     document.getElementById('tc-output').textContent = tags;
 }
 function copyTwitterCard() {
-    navigator.clipboard.writeText(document.getElementById('tc-output').textContent);
+    const copied = document.getElementById('tc-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

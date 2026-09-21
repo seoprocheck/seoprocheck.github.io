@@ -278,7 +278,7 @@ function checkEntityClarity() {
         pass: entityCount >= 3,
         detail: `"${entity}" mentioned ${entityCount} times. ${entityCount >= 3 ? 'Good density.' : 'Consider adding more mentions.'}`
     });
-    const firstPara = content.split('\n')[0] || '';
+    const firstPara = content.split('\n').find(l => l.trim()) || '';
     const earlyMention = firstPara.toLowerCase().includes(entity.toLowerCase());
     checks.push({
         name: 'Early Entity Definition',

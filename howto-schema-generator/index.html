@@ -263,6 +263,10 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
         <label>Estimated Cost</label>
         <input type="text" id="howto-cost" placeholder="50">
     </div>
+<div class="spc-field">
+    <label>Currency (three-letter code)</label>
+    <input type="text" id="howto-currency" value="USD" maxlength="3">
+</div>
 </div>
 <h4 style="color:#333;margin:20px 0 10px;">Steps</h4>
 <div id="howto-steps">
@@ -291,11 +295,12 @@ function addHowtoStep() {
 }
 function generateHowtoSchema() {
     const steps = [];
-    document.querySelectorAll('.howto-step').forEach((s, i) => {
+    document.querySelectorAll('.howto-step').forEach(s => {
         const name = s.querySelector('.step-name').value;
         const text = s.querySelector('.step-text').value;
         if (name || text) {
-            steps.push({"@type": "HowToStep", "position": i + 1, "name": name || `Step ${i+1}`, "text": text});
+            const n = steps.length + 1;
+            steps.push({"@type": "HowToStep", "position": n, "name": name || `Step ${n}`, "text": text});
         }
     });
     const schema = {
@@ -304,7 +309,7 @@ function generateHowtoSchema() {
         "name": document.getElementById('howto-title').value,
         "description": document.getElementById('howto-desc').value,
         "totalTime": document.getElementById('howto-time').value || undefined,
-        "estimatedCost": document.getElementById('howto-cost').value ? {"@type": "MonetaryAmount", "value": document.getElementById('howto-cost').value, "currency": "USD"} : undefined,
+        "estimatedCost": document.getElementById('howto-cost').value ? {"@type": "MonetaryAmount", "value": document.getElementById('howto-cost').value, "currency": ((document.getElementById('howto-currency') || {}).value || 'USD').trim().toUpperCase()} : undefined,
         "step": steps
     };
     Object.keys(schema).forEach(k => schema[k] === undefined && delete schema[k]);
@@ -313,7 +318,9 @@ function generateHowtoSchema() {
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 function copyHowtoSchema() {
-    navigator.clipboard.writeText(document.getElementById('howto-output').textContent);
+    const copied = document.getElementById('howto-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 </script>

@@ -270,13 +270,14 @@ function findContentGaps() {
     const topic = document.getElementById('gap-topic').value.toLowerCase().trim();
     const content = document.getElementById('gap-content').value.toLowerCase();
     if (!topic) { alert('Please enter a topic'); return; }
-    const framework = topic.includes('seo') ? topicFrameworks.seo : topicFrameworks.default;
+    const hasWord = (text, w) => new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?=[^a-z0-9]|$)', 'i').test(text);
+    const framework = hasWord(topic, 'seo') ? topicFrameworks.seo : topicFrameworks.default;
     const suggestions = [];
     const covered = [];
     framework.forEach(f => {
         const phrase = f + ' ' + topic;
         const altPhrase = topic + ' ' + f;
-        if (content.includes(f) || content.includes(phrase.replace(/ /g, '')) || content.includes(altPhrase.replace(/ /g, ''))) {
+        if (hasWord(content, f) || content.includes(phrase.replace(/ /g, '')) || content.includes(altPhrase.replace(/ /g, ''))) {
             covered.push(`${f} ${topic}`);
         } else {
             suggestions.push(`${f} ${topic}`);

@@ -312,7 +312,9 @@ function generateHreflang() {
     document.getElementById('hreflang-output').textContent = html;
 }
 function copyHreflang() {
-    navigator.clipboard.writeText(document.getElementById('hreflang-output').textContent);
+    const copied = document.getElementById('hreflang-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

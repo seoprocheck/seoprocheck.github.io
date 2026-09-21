@@ -270,18 +270,20 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <script>
 function encodeEntities() {
     const input = document.getElementById('entity-input').value;
-    const div = document.createElement('div');
-    div.textContent = input;
-    document.getElementById('entity-output').value = div.innerHTML;
+    const out = input.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    document.getElementById('entity-output').value = out;
 }
 function decodeEntities() {
     const input = document.getElementById('entity-input').value;
-    const div = document.createElement('div');
-    div.innerHTML = input;
-    document.getElementById('entity-output').value = div.textContent;
+    // a <textarea> parses its content as text: entities are decoded, tags stay as typed, nothing runs
+    const ta = document.createElement('textarea');
+    ta.innerHTML = input;
+    document.getElementById('entity-output').value = ta.value;
 }
 function copyEntities() {
-    navigator.clipboard.writeText(document.getElementById('entity-output').value);
+    const copied = document.getElementById('entity-output').value;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

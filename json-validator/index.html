@@ -283,7 +283,9 @@ function minifyJSON() {
     }
 }
 function copyJSON() {
-    navigator.clipboard.writeText(document.getElementById('json-output').textContent);
+    const copied = document.getElementById('json-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

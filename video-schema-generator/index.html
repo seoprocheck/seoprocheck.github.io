@@ -260,9 +260,13 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
         <input type="url" id="video-thumb" placeholder="https://example.com/thumbnail.jpg">
     </div>
     <div class="spc-field">
-        <label>Video URL (embed or content)</label>
+        <label>Video file URL (contentUrl)</label>
         <input type="url" id="video-url" placeholder="https://youtube.com/embed/...">
     </div>
+<div class="spc-field">
+    <label>Embed URL (the player address, optional)</label>
+    <input type="url" id="video-embed" placeholder="https://www.youtube.com/embed/VIDEO_ID">
+</div>
 </div>
 <div class="spc-row">
     <div class="spc-field">
@@ -291,7 +295,7 @@ function generateVideoSchema() {
         "uploadDate": document.getElementById('video-date').value,
         "duration": document.getElementById('video-duration').value || undefined,
         "contentUrl": document.getElementById('video-url').value,
-        "embedUrl": document.getElementById('video-url').value
+        "embedUrl": (document.getElementById('video-embed') || {}).value || undefined
     };
     Object.keys(schema).forEach(k => !schema[k] && delete schema[k]);
     const output = document.getElementById('video-output');
@@ -299,7 +303,9 @@ function generateVideoSchema() {
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 function copyVideoSchema() {
-    navigator.clipboard.writeText(document.getElementById('video-output').textContent);
+    const copied = document.getElementById('video-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 </script>

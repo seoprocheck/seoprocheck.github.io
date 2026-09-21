@@ -2,10 +2,10 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Content Readiness Checker — Free SEO Tool | SEO ProCheck</title>
-<meta name="description" content="AI Content Readiness Checker — a free SEO ProCheck tool.">
+<meta name="description" content="Paste a page and see whether it has the structure AI answer engines can quote: headings, direct answers, lists, schema and sources.">
 <link rel="canonical" href="https://seoprocheck.github.io/ai-content-readiness/">
 <meta property="og:title" content="AI Content Readiness Checker — Free SEO Tool | SEO ProCheck">
-<meta property="og:description" content="AI Content Readiness Checker — a free SEO ProCheck tool.">
+<meta property="og:description" content="Paste a page and see whether it has the structure AI answer engines can quote: headings, direct answers, lists, schema and sources.">
 <meta property="og:type" content="website"><meta property="og:url" content="https://seoprocheck.github.io/ai-content-readiness/">
 <meta property="og:site_name" content="SEO ProCheck">
 <meta name="twitter:card" content="summary">
@@ -242,15 +242,11 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a href="https://seoprocheck.com">seoprocheck.com →</a>
 </div></header>
 <div class="wrap crumb"><a href="/">← All tools</a></div>
-<div class="wrap toolhead"><h1>AI Content Readiness Checker</h1><p>AI Content Readiness Checker — a free SEO ProCheck tool.</p></div>
+<div class="wrap toolhead"><h1>AI Content Readiness Checker</h1><p>Paste a page and see whether it has the structure AI answer engines can quote: headings, direct answers, lists, schema and sources.</p></div>
 <div class="wrap toolstage">
 <div class="spc-tool-wrapper" id="ai-readiness">
 <h3>AI Content Readiness Checker</h3>
 <p style="color:#666;font-size:0.9rem;margin-bottom:20px;">Check if your content is optimized for AI systems and generative search.</p>
-<div class="spc-field">
-    <label>Page URL</label>
-    <input type="url" id="readiness-url" placeholder="https://example.com/page">
-</div>
 <div class="spc-field">
     <label>Page Content (paste HTML or text)</label>
     <textarea id="readiness-content" placeholder="Paste your page content here..." style="min-height:200px;"></textarea>
@@ -272,7 +268,7 @@ function checkAIReadiness() {
     checks.push({cat: 'Structured Data', name: 'Schema Markup', pass: hasSchema, tip: 'Add JSON-LD structured data'});
     const hasHeadings = /<h[1-6]/i.test(content) || /^#{1,6}\s/m.test(content);
     checks.push({cat: 'Content Structure', name: 'Heading Hierarchy', pass: hasHeadings, tip: 'Use H1-H6 for clear structure'});
-    const hasFAQ = /faq|question|answer|q:|a:/i.test(content);
+    const hasFAQ = /FAQPage|\bfaq\b|frequently asked|^\s*q:\s|<(h[2-4]|dt|summary)[^>]*>[^<]*\?\s*<\//im.test(content);
     checks.push({cat: 'Content Structure', name: 'FAQ Content', pass: hasFAQ, tip: 'Add FAQ section with Q&A format'});
     const hasList = /<[uo]l|<li|\n-\s|\n\d+\./i.test(content);
     checks.push({cat: 'Content Structure', name: 'Lists Present', pass: hasList, tip: 'Use bullet/numbered lists for scannability'});

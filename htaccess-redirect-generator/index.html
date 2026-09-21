@@ -314,7 +314,9 @@ function generateHtaccess() {
     document.getElementById('htaccess-output').textContent = code;
 }
 function copyHtaccess() {
-    navigator.clipboard.writeText(document.getElementById('htaccess-output').textContent);
+    const copied = document.getElementById('htaccess-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

@@ -290,7 +290,9 @@ function generateBreadcrumbSchema() {
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 function copyBreadcrumbSchema() {
-    navigator.clipboard.writeText(document.getElementById('breadcrumb-output').textContent);
+    const copied = document.getElementById('breadcrumb-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 </script>

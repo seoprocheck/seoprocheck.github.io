@@ -301,11 +301,16 @@ function buildUTM() {
     if (campaign) params.push('utm_campaign=' + encodeURIComponent(campaign));
     if (term) params.push('utm_term=' + encodeURIComponent(term));
     if (content) params.push('utm_content=' + encodeURIComponent(content));
-    const separator = url.includes('?') ? '&' : '?';
-    document.getElementById('utm-result').value = params.length ? url + separator + params.join('&') : url;
+    const hashAt = url.indexOf('#');
+    const base = hashAt >= 0 ? url.slice(0, hashAt) : url;
+    const hash = hashAt >= 0 ? url.slice(hashAt) : '';
+    const separator = base.includes('?') ? '&' : '?';
+    document.getElementById('utm-result').value = params.length ? base + separator + params.join('&') + hash : url;
 }
 function copyUTM() {
-    navigator.clipboard.writeText(document.getElementById('utm-result').value);
+    const copied = document.getElementById('utm-result').value;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 function clearUTM() {

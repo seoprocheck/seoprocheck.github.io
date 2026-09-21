@@ -274,8 +274,58 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
         <input type="text" id="event-address" placeholder="123 Main St">
     </div>
     <div class="spc-field">
-        <label>City, State, Country</label>
-        <input type="text" id="event-city" placeholder="Austin, TX, USA">
+        <label>City</label>
+        <input type="text" id="event-city" placeholder="Austin">
+    </div>
+</div>
+<div class="spc-row">
+    <div class="spc-field">
+        <label>State or region</label>
+        <input type="text" id="event-region" placeholder="TX">
+    </div>
+    <div class="spc-field">
+        <label>Country (two-letter code)</label>
+        <input type="text" id="event-country" placeholder="US" maxlength="2">
+    </div>
+</div>
+<div class="spc-row">
+    <div class="spc-field">
+        <label>Event status</label>
+        <select id="event-status">
+            <option value="EventScheduled">Scheduled</option>
+            <option value="EventRescheduled">Rescheduled</option>
+            <option value="EventPostponed">Postponed</option>
+            <option value="EventCancelled">Cancelled</option>
+        </select>
+    </div>
+    <div class="spc-field">
+        <label>Attendance</label>
+        <select id="event-mode">
+            <option value="OfflineEventAttendanceMode">In person</option>
+            <option value="OnlineEventAttendanceMode">Online</option>
+            <option value="MixedEventAttendanceMode">Both</option>
+        </select>
+    </div>
+</div>
+<div class="spc-row">
+    <div class="spc-field">
+        <label>Organizer name</label>
+        <input type="text" id="event-organizer" placeholder="Your company">
+    </div>
+    <div class="spc-field">
+        <label>Image URL</label>
+        <input type="url" id="event-image" placeholder="https://example.com/event.jpg">
+    </div>
+</div>
+<div class="spc-row">
+    <div class="spc-field">
+        <label>Ticket URL</label>
+        <input type="url" id="event-ticket-url" placeholder="https://example.com/tickets">
+    </div>
+    <div class="spc-field">
+        <label>Price and currency</label>
+        <input type="text" id="event-price" placeholder="49.00">
+        <input type="text" id="event-currency" placeholder="USD" maxlength="3" style="margin-top:8px;">
     </div>
 </div>
 <div class="spc-field">
@@ -297,24 +347,41 @@ function generateEventSchema() {
         "description": document.getElementById('event-desc').value,
         "startDate": document.getElementById('event-start').value,
         "endDate": document.getElementById('event-end').value || undefined,
+        "eventStatus": "https://schema.org/" + document.getElementById('event-status').value,
+        "eventAttendanceMode": "https://schema.org/" + document.getElementById('event-mode').value,
         "location": {
             "@type": "Place",
             "name": document.getElementById('event-location').value,
             "address": {
                 "@type": "PostalAddress",
                 "streetAddress": document.getElementById('event-address').value,
-                "addressLocality": document.getElementById('event-city').value
+                "addressLocality": document.getElementById('event-city').value,
+                "addressRegion": document.getElementById('event-region').value,
+                "addressCountry": document.getElementById('event-country').value.trim().toUpperCase()
             }
         },
+        "image": document.getElementById('event-image').value || undefined,
         "url": document.getElementById('event-url').value || undefined
     };
+    const addr = schema.location.address;
+    Object.keys(addr).forEach(k => { if (k !== '@type' && !String(addr[k] || '').trim()) delete addr[k]; });
+    const org = document.getElementById('event-organizer').value.trim();
+    if (org) schema.organizer = {"@type": "Organization", "name": org};
+    const tUrl = document.getElementById('event-ticket-url').value.trim(), price = document.getElementById('event-price').value.trim();
+    if (tUrl || price) {
+        schema.offers = {"@type": "Offer", "availability": "https://schema.org/InStock"};
+        if (tUrl) schema.offers.url = tUrl;
+        if (price) { schema.offers.price = price; schema.offers.priceCurrency = (document.getElementById('event-currency').value.trim() || 'USD').toUpperCase(); }
+    }
     Object.keys(schema).forEach(k => !schema[k] && delete schema[k]);
     const output = document.getElementById('event-output');
     output.style.display = 'block';
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 function copyEventSchema() {
-    navigator.clipboard.writeText(document.getElementById('event-output').textContent);
+    const copied = document.getElementById('event-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 </script>

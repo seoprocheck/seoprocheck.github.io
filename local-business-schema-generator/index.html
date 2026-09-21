@@ -290,6 +290,14 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
         <label>Country (two-letter code)</label>
         <input type="text" id="lb-country" value="US" maxlength="2" placeholder="US">
     </div>
+    <div class="spc-field">
+        <label>Latitude (optional)</label>
+        <input type="text" id="lb-lat" placeholder="32.7767">
+    </div>
+    <div class="spc-field">
+        <label>Longitude (optional)</label>
+        <input type="text" id="lb-lng" placeholder="-96.7970">
+    </div>
 </div>
 <div class="spc-row">
     <div class="spc-field">
@@ -348,8 +356,12 @@ function generateLocalSchema() {
     if (price) schema.priceRange = price;
     const logo = document.getElementById('lb-logo').value;
     if (logo) schema.logo = logo;
-    const hours = document.getElementById('lb-hours').value;
-    if (hours) schema.openingHours = hours;
+    const hours = document.getElementById('lb-hours').value.split(',').map(h => h.trim()).filter(Boolean);
+    if (hours.length) schema.openingHours = hours.length === 1 ? hours[0] : hours;
+    Object.keys(schema.address).forEach(k => { if (k !== '@type' && !String(schema.address[k] || '').trim()) delete schema.address[k]; });
+    if (Object.keys(schema.address).length === 1) delete schema.address;
+    const lat = parseFloat(document.getElementById('lb-lat').value), lng = parseFloat(document.getElementById('lb-lng').value);
+    if (!isNaN(lat) && !isNaN(lng)) schema.geo = {"@type": "GeoCoordinates", "latitude": lat, "longitude": lng};
     Object.keys(schema).forEach(k => {
         if (!schema[k] || (typeof schema[k] === 'object' && !Object.values(schema[k]).some(v => v))) {
             delete schema[k];
@@ -360,7 +372,9 @@ function generateLocalSchema() {
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 function copyLocalSchema() {
-    navigator.clipboard.writeText(document.getElementById('lb-output').textContent);
+    const copied = document.getElementById('lb-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

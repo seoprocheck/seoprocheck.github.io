@@ -259,10 +259,10 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 function analyzeHeadings() {
     const content = document.getElementById('heading-content').value;
     const headings = [];
-    const regex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
+    const regex = /<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1\s*>/gi;
     let match;
     while ((match = regex.exec(content)) !== null) {
-        headings.push({level: parseInt(match[1]), text: match[2].replace(/<[^>]*>/g, '').trim()});
+        headings.push({level: parseInt(match[1]), text: match[2].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()});
     }
     if (headings.length === 0) {
         document.getElementById('heading-results').innerHTML = '<div class="spc-error">No headings found. Make sure to paste HTML content with h1-h6 tags.</div>';

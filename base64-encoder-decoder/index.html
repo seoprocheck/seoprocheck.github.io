@@ -274,7 +274,9 @@ function decodeBase64() {
     } catch(e) { alert('Error decoding: Invalid Base64 string'); }
 }
 function copyBase64() {
-    navigator.clipboard.writeText(document.getElementById('b64-output').value);
+    const copied = document.getElementById('b64-output').value;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

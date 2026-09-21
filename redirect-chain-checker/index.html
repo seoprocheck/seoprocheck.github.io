@@ -307,7 +307,7 @@ function analyzeChain(){
   let verdict,cls;
   if(redirects===0){verdict='No redirects — direct 200. Perfect.';}
   else if(redirects===1){verdict='1 redirect — fine for permanent moves (make sure it’s a 301).';}
-  else{verdict=redirects+' chained redirects — collapse the chain: every hop costs latency and crawl budget, and equity dilutes.';}
+  else{verdict=redirects+' chained redirects: collapse the chain: every hop adds a round trip for users and crawlers.';}
   html+='<div class="spc-info" style="margin-top:15px;"><strong>Verdict:</strong> '+verdict+'</div>';
   const finalLoc=hops.filter(h=>h.location).map(h=>h.location).pop();
   const startUrl=normUrl(document.getElementById('redirect-url').value);
@@ -315,7 +315,7 @@ function analyzeChain(){
     try{
       const sp=new URL(startUrl).pathname;
       html+='<p style="margin-top:15px;"><strong>Collapse it — ready-to-paste .htaccess rule (start → final):</strong></p>';
-      html+='<div class="spc-output">Redirect 301 '+escH(sp)+' '+escH(finalLoc)+'</div>';
+      html+='<div class="spc-output">RedirectMatch 301 ^'+escH(sp.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'))+'/?$ '+escH(finalLoc)+'</div>';
     }catch(e){}
   }
   html+='</div>';

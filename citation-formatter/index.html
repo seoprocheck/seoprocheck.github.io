@@ -294,13 +294,16 @@ function formatCitation() {
     output += `${finding} (Source: ${source || title}${year ? ', ' + year : ''})\n\n`;
     output += '--- Reference Format ---\n';
     output += `${author ? author + '. ' : ''}${year ? '(' + year + '). ' : ''}"${title}." ${source ? source + '. ' : ''}${url ? url : ''}\n\n`;
-    output += '--- HTML with Microdata ---\n';
-    output += `<cite>${author || 'Research'}${year ? ' (' + year + ')' : ''}</cite>: "${finding}" <a href="${url || '#'}">[Source: ${source || title}]</a>`;
+    const h = v => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    output += '--- HTML ---\n';
+    output += `<blockquote cite="${h(url || '')}">${h(finding)}</blockquote>\n<p>${h(author || 'Research')}${year ? ' (' + h(year) + ')' : ''}, <cite>${url ? '<a href="' + h(url) + '">' + h(source || title) + '</a>' : h(source || title)}</cite></p>`;
     document.getElementById('cite-output').style.display = 'block';
     document.getElementById('cite-output').textContent = output;
 }
 function copyCitation() {
-    navigator.clipboard.writeText(document.getElementById('cite-output').textContent);
+    const copied = document.getElementById('cite-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 </script>

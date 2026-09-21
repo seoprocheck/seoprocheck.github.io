@@ -279,7 +279,7 @@ function checkDensity() {
     let status = 'Good';
     let statusColor = '#28a745';
     if (density < 0.5) { status = 'Too Low'; statusColor = '#ffc107'; }
-    else if (density > 3) { status = 'Too High (Keyword Stuffing Risk)'; statusColor = '#dc3545'; }
+    else if (density > 2.5) { status = 'Too High (Keyword Stuffing Risk)'; statusColor = '#dc3545'; }
     let html = '<div class="spc-preview-box">';
     html += `<div style="font-size:2rem;font-weight:700;color:${statusColor};">${density}%</div>`;
     html += `<div style="color:#666;margin-bottom:15px;">Keyword Density - ${status}</div>`;
@@ -289,7 +289,7 @@ function checkDensity() {
     html += `<tr><td>Total Words</td><td>${totalWords}</td></tr>`;
     html += `<tr><td>Density</td><td>${density}%</td></tr>`;
     html += '</table></div>';
-    html += '<div class="spc-info" style="margin-top:15px;"><strong>Ideal Range:</strong> 0.5% - 2.5% for primary keywords. Focus on natural writing over density targets.</div>';
+    html += '<div class="spc-info" style="margin-top:15px;"><strong>Rule of thumb:</strong> 0.5% to 2.5% for a primary keyword. No search engine publishes a target density; treat this as a sanity check against stuffing, not a goal.</div>';
     document.getElementById('density-results').innerHTML = html;
 }
 </script>

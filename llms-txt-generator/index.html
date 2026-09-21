@@ -293,7 +293,9 @@ function generateLLMsTxt() {
     output.textContent = txt;
 }
 function copyLLMsTxt() {
-    navigator.clipboard.writeText(document.getElementById('llms-output').textContent);
+    const copied = document.getElementById('llms-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 function downloadLLMsTxt() {

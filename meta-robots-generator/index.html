@@ -288,7 +288,9 @@ function generateMetaRobots() {
     document.getElementById('meta-robots-output').textContent = output;
 }
 function copyMetaRobots() {
-    navigator.clipboard.writeText(document.getElementById('meta-robots-output').textContent);
+    const copied = document.getElementById('meta-robots-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

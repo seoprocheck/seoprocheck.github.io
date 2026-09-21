@@ -290,7 +290,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 </div>
 <script>
 function normalizeText(text) {
-    return text.toLowerCase()
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
         .replace(/[^a-z0-9\s]/g, '')
         .replace(/\s+/g, ' ')
         .trim();

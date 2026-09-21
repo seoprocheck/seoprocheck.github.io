@@ -270,15 +270,18 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <script>
 function generateSlug() {
     const input = document.getElementById('slug-input').value;
-    const slug = input.toLowerCase()
-        .replace(/[^\w\s-]/g, '')
+    const slug = input.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+        .replace(/_/g, '-')
+        .replace(/[^a-z0-9\s-]/g, '')
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
         .replace(/^-+|-+$/g, '');
     document.getElementById('slug-output').value = slug;
 }
 function copySlug() {
-    navigator.clipboard.writeText(document.getElementById('slug-output').value);
+    const copied = document.getElementById('slug-output').value;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

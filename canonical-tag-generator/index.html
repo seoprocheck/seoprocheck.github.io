@@ -277,7 +277,9 @@ function generateCanonical() {
     document.getElementById('canonical-output').textContent = output;
 }
 function copyCanonical() {
-    navigator.clipboard.writeText(document.getElementById('canonical-output').textContent);
+    const copied = document.getElementById('canonical-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

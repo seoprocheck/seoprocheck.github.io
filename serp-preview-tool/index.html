@@ -273,16 +273,17 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 </div>
 <script>
 function updateSerpPreview() {
-    const title = document.getElementById('serp-title').value || 'Your Page Title';
+    const titleIn = document.getElementById('serp-title').value, descIn = document.getElementById('serp-desc').value;
+    const title = titleIn || 'Your Page Title';
     const url = document.getElementById('serp-url').value || 'https://example.com/page-url/';
     const desc = document.getElementById('serp-desc').value || 'Your meta description will appear here.';
     document.getElementById('preview-title').textContent = title.substring(0, 60) + (title.length > 60 ? '...' : '');
     document.getElementById('preview-url').textContent = url;
     document.getElementById('preview-desc').textContent = desc.substring(0, 160) + (desc.length > 160 ? '...' : '');
-    document.getElementById('title-count').textContent = title.length + '/60 characters';
-    document.getElementById('title-count').style.color = title.length > 60 ? '#dc3545' : title.length >= 50 ? '#28a745' : '#666';
-    document.getElementById('desc-count').textContent = desc.length + '/160 characters';
-    document.getElementById('desc-count').style.color = desc.length > 160 ? '#dc3545' : desc.length >= 150 ? '#28a745' : '#666';
+    document.getElementById('title-count').textContent = titleIn.length + '/60 characters';
+    document.getElementById('title-count').style.color = titleIn.length > 60 ? '#dc3545' : titleIn.length >= 50 ? '#28a745' : '#666';
+    document.getElementById('desc-count').textContent = descIn.length + '/160 characters';
+    document.getElementById('desc-count').style.color = descIn.length > 160 ? '#dc3545' : descIn.length >= 150 ? '#28a745' : '#666';
 }
 </script>
 </div>

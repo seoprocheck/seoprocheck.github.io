@@ -268,6 +268,14 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
         <input type="url" id="mt-canonical" placeholder="https://example.com/page/">
     </div>
     <div class="spc-field">
+        <label>Robots</label>
+        <select id="mt-robots">
+            <option value="index, follow">index, follow</option>
+            <option value="noindex, follow">noindex, follow</option>
+            <option value="noindex, nofollow">noindex, nofollow</option>
+        </select>
+    </div>
+    <div class="spc-field">
         <label>Language</label>
         <select id="mt-lang">
             <option value="en">English</option>
@@ -294,8 +302,9 @@ function generateMetaTags() {
     let tags = '<!-- Essential Meta Tags -->\n';
     tags += '<meta charset="UTF-8" />\n';
     tags += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n';
-    tags += `<title>${attrEsc(document.getElementById('mt-title').value)}</title>\n`;
-    tags += `<meta name="description" content="${attrEsc(document.getElementById('mt-desc').value)}" />\n`;
+    const mTitle = document.getElementById('mt-title').value.trim(), mDesc = document.getElementById('mt-desc').value.trim();
+    if (mTitle) tags += `<title>${attrEsc(mTitle)}</title>\n`;
+    if (mDesc) tags += `<meta name="description" content="${attrEsc(mDesc)}" />\n`;
     const keywords = document.getElementById('mt-keywords').value;
     if (keywords) tags += `<meta name="keywords" content="${attrEsc(keywords)}" />\n`;
     const author = document.getElementById('mt-author').value;
@@ -305,12 +314,15 @@ function generateMetaTags() {
     const lang = document.getElementById('mt-lang').value;
     if (lang) tags += `<!-- set the language on the html element: <html lang="${attrEsc(lang)}"> -->\n`;
     tags += '\n<!-- Robots -->\n';
-    tags += '<meta name="robots" content="index, follow" />\n';
+    const robots = (document.getElementById('mt-robots') || {}).value || 'index, follow';
+    tags += `<meta name="robots" content="${attrEsc(robots)}" />\n`;
     document.getElementById('mt-output').style.display = 'block';
     document.getElementById('mt-output').textContent = tags;
 }
 function copyMetaTags() {
-    navigator.clipboard.writeText(document.getElementById('mt-output').textContent);
+    const copied = document.getElementById('mt-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

@@ -277,7 +277,8 @@ function getRandomWords(count) {
     return result.join(' ') + '.';
 }
 function generateLorem() {
-    const count = parseInt(document.getElementById('lorem-count').value);
+    const count = Math.min(20, Math.max(1, parseInt(document.getElementById('lorem-count').value) || 1));
+    document.getElementById('lorem-count').value = count;
     const type = document.getElementById('lorem-type').value;
     let output = '';
     if (type === 'paragraphs') {
@@ -304,7 +305,9 @@ function generateLorem() {
     document.getElementById('lorem-output').textContent = output.trim();
 }
 function copyLorem() {
-    navigator.clipboard.writeText(document.getElementById('lorem-output').textContent);
+    const copied = document.getElementById('lorem-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

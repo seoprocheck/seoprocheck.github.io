@@ -269,8 +269,11 @@ function toLocalInput(d) {
     return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 function tsToHuman() {
-    const ts = document.getElementById('ts-unix').value;
+    let ts = document.getElementById('ts-unix').value.trim();
     if (!ts) return;
+    // 13 digits is milliseconds, 16 is microseconds: bring both back to seconds
+    if (/^-?\d{16}$/.test(ts)) ts = Math.floor(ts / 1e6);
+    else if (/^-?\d{13}$/.test(ts)) ts = Math.floor(ts / 1e3);
     const date = new Date(ts * 1000);
     document.getElementById('ts-human').value = toLocalInput(date);
     showResult(ts, date);

@@ -335,12 +335,15 @@ function patternMatch(path,pattern){
   return true;
 }
 function selectGroup(groups,token){
-  const t=token.toLowerCase();let exact=null,star=null;
-  groups.forEach(g=>g.agents.forEach(a=>{
-    const al=a.toLowerCase();
-    if(al===t)exact=g;else if(al==='*')star=g;
-  }));
-  return exact||star;
+  // RFC 9309: every group that names the bot applies, merged into one; '*' only if none does
+  const t=token.toLowerCase();const exact=[],star=[];
+  groups.forEach(g=>{
+    const names=g.agents.map(a=>a.toLowerCase());
+    if(names.includes(t))exact.push(g);else if(names.includes('*'))star.push(g);
+  });
+  const pick=exact.length?exact:star;
+  if(!pick.length)return null;
+  return {agents:[].concat(...pick.map(g=>g.agents)),rules:[].concat(...pick.map(g=>g.rules))};
 }
 function evaluateBot(groups,token,path){
   const g=selectGroup(groups,token);

@@ -247,10 +247,6 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="spc-tool-wrapper" id="robots-generator">
 <h3>Robots.txt Generator</h3>
 <div class="spc-field">
-    <label>Site URL</label>
-    <input type="url" id="robots-site" placeholder="https://example.com">
-</div>
-<div class="spc-field">
     <label>Sitemap URL</label>
     <input type="url" id="robots-sitemap" placeholder="https://example.com/sitemap.xml">
 </div>
@@ -285,7 +281,7 @@ function generateRobotsTxt() {
     txt += '\n';
     const blocks = [];
     if (document.getElementById('block-gptbot').checked) blocks.push('GPTBot');
-    if (document.getElementById('block-claude').checked) blocks.push('ClaudeBot', 'anthropic-ai', 'Claude-Web');
+    if (document.getElementById('block-claude').checked) blocks.push('ClaudeBot'); // the older anthropic-ai and Claude-Web names are retired
     if (document.getElementById('block-perplexity').checked) blocks.push('PerplexityBot');
     if (document.getElementById('block-ccbot').checked) blocks.push('CCBot');
     if (document.getElementById('block-google-extended').checked) blocks.push('Google-Extended');
@@ -298,7 +294,9 @@ function generateRobotsTxt() {
     document.getElementById('robots-output').textContent = txt;
 }
 function copyRobotsTxt() {
-    navigator.clipboard.writeText(document.getElementById('robots-output').textContent);
+    const copied = document.getElementById('robots-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 function downloadRobotsTxt() {

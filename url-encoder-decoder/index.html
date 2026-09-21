@@ -270,7 +270,9 @@ function decodeURL() {
     } catch(e) { alert('Error decoding URL'); }
 }
 function copyURLResult() {
-    navigator.clipboard.writeText(document.getElementById('url-output').value);
+    const copied = document.getElementById('url-output').value;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied!');
 }
 </script>

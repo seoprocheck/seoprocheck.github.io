@@ -290,7 +290,9 @@ function generateFaqSchema() {
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 function copyFaqSchema() {
-    navigator.clipboard.writeText(document.getElementById('faq-output').textContent);
+    const copied = document.getElementById('faq-output').textContent;
+    if (!copied || !String(copied).trim()) { alert('Nothing to copy yet: generate the result first.'); return; }
+    navigator.clipboard.writeText(copied);
     alert('Copied to clipboard!');
 }
 </script>
