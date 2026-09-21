@@ -275,12 +275,13 @@ function addBreadcrumbItem() {
     container.appendChild(div);
 }
 function generateBreadcrumbSchema() {
+    // positions must run 1..n over the rows that are actually filled in
     const items = [];
-    document.querySelectorAll('.breadcrumb-item').forEach((item, i) => {
+    document.querySelectorAll('.breadcrumb-item').forEach(item => {
         const name = item.querySelector('.bc-name').value;
         const url = item.querySelector('.bc-url').value;
         if (name) {
-            items.push({"@type": "ListItem", "position": i + 1, "name": name, "item": url || undefined});
+            items.push({"@type": "ListItem", "position": items.length + 1, "name": name, "item": url || undefined});
         }
     });
     const schema = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items};

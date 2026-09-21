@@ -261,6 +261,9 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div id="entity-results" style="margin-top:20px;"></div>
 </div>
 <script>
+function reEsc(s) {
+    return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 function checkEntityClarity() {
     const content = document.getElementById('entity-content').value;
     const entity = document.getElementById('entity-name').value;
@@ -269,7 +272,7 @@ function checkEntityClarity() {
         return;
     }
     const checks = [];
-    const entityCount = (content.match(new RegExp(entity, 'gi')) || []).length;
+    const entityCount = (content.match(new RegExp(reEsc(entity), 'gi')) || []).length;
     checks.push({
         name: 'Entity Mention Frequency',
         pass: entityCount >= 3,

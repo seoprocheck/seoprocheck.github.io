@@ -283,16 +283,20 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="spc-output" id="og-output" style="display:none;"></div>
 </div>
 <script>
+function attrEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 function generateOG() {
     let tags = '<!-- Open Graph Meta Tags -->\n';
-    tags += `<meta property="og:title" content="${document.getElementById('og-title').value}" />\n`;
-    tags += `<meta property="og:description" content="${document.getElementById('og-desc').value}" />\n`;
-    tags += `<meta property="og:url" content="${document.getElementById('og-url').value}" />\n`;
-    tags += `<meta property="og:type" content="${document.getElementById('og-type').value}" />\n`;
+    tags += `<meta property="og:title" content="${attrEsc(document.getElementById('og-title').value)}" />\n`;
+    tags += `<meta property="og:description" content="${attrEsc(document.getElementById('og-desc').value)}" />\n`;
+    tags += `<meta property="og:url" content="${attrEsc(document.getElementById('og-url').value)}" />\n`;
+    tags += `<meta property="og:type" content="${attrEsc(document.getElementById('og-type').value)}" />\n`;
     const image = document.getElementById('og-image').value;
-    if (image) tags += `<meta property="og:image" content="${image}" />\n`;
+    if (image) tags += `<meta property="og:image" content="${attrEsc(image)}" />\n`;
     const site = document.getElementById('og-site').value;
-    if (site) tags += `<meta property="og:site_name" content="${site}" />\n`;
+    if (site) tags += `<meta property="og:site_name" content="${attrEsc(site)}" />\n`;
+    tags += '<meta property="og:locale" content="en_US" />\n';
     document.getElementById('og-output').style.display = 'block';
     document.getElementById('og-output').textContent = tags;
 }

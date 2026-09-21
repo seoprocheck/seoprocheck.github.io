@@ -276,15 +276,21 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="spc-output" id="tc-output" style="display:none;"></div>
 </div>
 <script>
+function attrEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 function generateTwitterCard() {
     let tags = '<!-- Twitter Card Meta Tags -->\n';
-    tags += `<meta name="twitter:card" content="${document.getElementById('tc-type').value}" />\n`;
-    tags += `<meta name="twitter:title" content="${document.getElementById('tc-title').value}" />\n`;
-    tags += `<meta name="twitter:description" content="${document.getElementById('tc-desc').value}" />\n`;
+    tags += `<meta name="twitter:card" content="${attrEsc(document.getElementById('tc-type').value)}" />\n`;
+    tags += `<meta name="twitter:title" content="${attrEsc(document.getElementById('tc-title').value)}" />\n`;
+    tags += `<meta name="twitter:description" content="${attrEsc(document.getElementById('tc-desc').value)}" />\n`;
     const image = document.getElementById('tc-image').value;
-    if (image) tags += `<meta name="twitter:image" content="${image}" />\n`;
+    if (image) {
+        tags += `<meta name="twitter:image" content="${attrEsc(image)}" />\n`;
+        tags += '<meta name="twitter:image:alt" content="Describe the image here" />\n';
+    }
     const site = document.getElementById('tc-site').value;
-    if (site) tags += `<meta name="twitter:site" content="${site}" />\n`;
+    if (site) tags += `<meta name="twitter:site" content="${attrEsc(site)}" />\n`;
     document.getElementById('tc-output').style.display = 'block';
     document.getElementById('tc-output').textContent = tags;
 }

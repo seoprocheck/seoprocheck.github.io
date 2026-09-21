@@ -287,19 +287,23 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="spc-output" id="mt-output" style="display:none;"></div>
 </div>
 <script>
+function attrEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 function generateMetaTags() {
     let tags = '<!-- Essential Meta Tags -->\n';
     tags += '<meta charset="UTF-8" />\n';
     tags += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n';
-    tags += `<title>${document.getElementById('mt-title').value}</title>\n`;
-    tags += `<meta name="description" content="${document.getElementById('mt-desc').value}" />\n`;
+    tags += `<title>${attrEsc(document.getElementById('mt-title').value)}</title>\n`;
+    tags += `<meta name="description" content="${attrEsc(document.getElementById('mt-desc').value)}" />\n`;
     const keywords = document.getElementById('mt-keywords').value;
-    if (keywords) tags += `<meta name="keywords" content="${keywords}" />\n`;
+    if (keywords) tags += `<meta name="keywords" content="${attrEsc(keywords)}" />\n`;
     const author = document.getElementById('mt-author').value;
-    if (author) tags += `<meta name="author" content="${author}" />\n`;
+    if (author) tags += `<meta name="author" content="${attrEsc(author)}" />\n`;
     const canonical = document.getElementById('mt-canonical').value;
-    if (canonical) tags += `<link rel="canonical" href="${canonical}" />\n`;
-    tags += `<meta http-equiv="content-language" content="${document.getElementById('mt-lang').value}" />\n`;
+    if (canonical) tags += `<link rel="canonical" href="${attrEsc(canonical)}" />\n`;
+    const lang = document.getElementById('mt-lang').value;
+    if (lang) tags += `<!-- set the language on the html element: <html lang="${attrEsc(lang)}"> -->\n`;
     tags += '\n<!-- Robots -->\n';
     tags += '<meta name="robots" content="index, follow" />\n';
     document.getElementById('mt-output').style.display = 'block';

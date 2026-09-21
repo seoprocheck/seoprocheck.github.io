@@ -283,10 +283,30 @@ function updateSchemaFields() {
 function generateSchema() {
     const type = document.getElementById('schema-type').value;
     const schema = {"@context": "https://schema.org", "@type": type};
+    const val = f => document.getElementById('sf-' + f)?.value?.trim();
     schemaFields[type].forEach(f => {
-        const val = document.getElementById('sf-' + f)?.value;
-        if (val) schema[f] = val;
+        const v = val(f);
+        if (v) schema[f] = v;
     });
+    // Google needs objects, not bare strings, for these properties
+    if (type === 'Product') {
+        const price = val('price'), currency = val('currency'), availability = val('availability'), brand = val('brand');
+        delete schema.price; delete schema.currency; delete schema.availability;
+        if (brand) schema.brand = {"@type": "Brand", "name": brand};
+        if (price || availability) {
+            schema.offers = {"@type": "Offer"};
+            if (price) schema.offers.price = price;
+            if (currency) schema.offers.priceCurrency = currency;
+            if (availability) schema.offers.availability = availability.startsWith('http') ? availability : 'https://schema.org/' + availability.replace(/\s+/g, '');
+        }
+    }
+    if (type === 'Article' && schema.author) {
+        schema.author = {"@type": "Person", "name": schema.author};
+    }
+    if (type === 'Article' && schema.publisher === undefined) {
+        // publisher is required for Article rich results
+        schema.publisher = {"@type": "Organization", "name": val('headline') ? (val('publisher') || 'Your organisation name') : 'Your organisation name'};
+    }
     const output = document.getElementById('schema-output');
     output.style.display = 'block';
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';

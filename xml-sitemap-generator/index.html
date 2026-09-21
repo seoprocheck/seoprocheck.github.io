@@ -282,6 +282,9 @@ https://example.com/services/" style="min-height:200px;"></textarea>
 <div class="spc-output" id="sitemap-output" style="display:none;"></div>
 </div>
 <script>
+function xmlEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
 function generateSitemap() {
     const urls = document.getElementById('sitemap-urls').value.split('\n').filter(u => u.trim());
     const freq = document.getElementById('sitemap-freq').value;
@@ -291,7 +294,7 @@ function generateSitemap() {
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
     urls.forEach(url => {
         xml += '  <url>\n';
-        xml += `    <loc>${url.trim()}</loc>\n`;
+        xml += `    <loc>${xmlEsc(url.trim())}</loc>\n`;
         xml += `    <lastmod>${today}</lastmod>\n`;
         xml += `    <changefreq>${freq}</changefreq>\n`;
         xml += `    <priority>${priority}</priority>\n`;

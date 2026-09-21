@@ -266,10 +266,13 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 </div>
 </div>
 <script>
+function attrEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 function generateCanonical() {
     const url = document.getElementById('canonical-url').value;
     if (!url) { alert('Please enter a URL'); return; }
-    const output = `<link rel="canonical" href="${url}" />`;
+    const output = `<link rel="canonical" href="${attrEsc(url)}" />`;
     document.getElementById('canonical-output').style.display = 'block';
     document.getElementById('canonical-output').textContent = output;
 }

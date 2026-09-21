@@ -268,8 +268,8 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 function escH(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('timed out after '+ms/1000+'s')),ms))]);}
 async function proxyFetch(url){
+  // corsproxy.io answers 401 to every request, so it is not in the list any more.
   const tries=[
-    'https://corsproxy.io/?url='+encodeURIComponent(url),
     'https://api.allorigins.win/raw?url='+encodeURIComponent(url)
   ];
   let lastErr;
@@ -328,14 +328,14 @@ async function liveRedirectCheck(){
   out.innerHTML='<div class="spc-info">Checking… (routed through a public CORS proxy)</div>';
   try{
     const r=await proxyFetch(url);
-    const finalUrl=(r.headers.get('x-final-url')||'').trim();
-    const changed=finalUrl&&finalUrl.replace(/\/$/,'')!==url.replace(/\/$/,'');
+    // The proxy follows redirects itself and a browser cannot read the target's own
+    // status or Location, so this check can confirm the page loads and nothing more.
     let html='<div class="spc-preview-box"><table><tr><th>Check</th><th>Result</th></tr>';
     html+='<tr><td>Start URL</td><td>'+escH(url)+'</td></tr>';
-    html+='<tr><td>Final URL</td><td>'+(finalUrl?escH(finalUrl):'(same or hidden by proxy)')+'</td></tr>';
-    html+='<tr><td>Redirected?</td><td>'+(changed?'↪️ Yes':'✅ No')+'</td></tr>';
-    html+='<tr><td>Final status</td><td>'+(r.status<400?'✅ ':'❌ ')+'HTTP '+r.status+'</td></tr></table>';
-    html+='<div class="spc-info" style="margin-top:15px;">The proxy follows redirects server-side, so hop-by-hop detail isn’t visible here. For the full chain run <span class="spc-output" style="display:inline;padding:2px 8px;">curl -sIL '+escH(url)+'</span> and paste the output above'+(changed?' — this URL does redirect, worth tracing.':'.')+'</div></div>';
+    html+='<tr><td>Loads through the proxy</td><td>'+(r.status<400?'✅ yes':'❌ no')+'</td></tr>';
+    html+='<tr><td>Redirected?</td><td>Not answerable from a browser</td></tr>';
+    html+='<tr><td>Status shown</td><td>HTTP '+r.status+' (the proxy\'s status, not the target\'s)</td></tr></table>';
+    html+='<div class="spc-info" style="margin-top:15px;">A browser cannot see another site\'s redirect chain: the proxy follows the hops server side and the target\'s own status and Location headers are hidden by CORS. To get the real chain run <span class="spc-output" style="display:inline;padding:2px 8px;">curl -sIL '+escH(url)+'</span> and paste the output into the box above, which traces every hop properly.</div></div>';
     out.innerHTML=html;
   }catch(e){
     out.innerHTML='<div class="spc-info">Live check failed ('+escH(e.message)+'). Run <code>curl -sIL '+escH(url)+'</code> and paste the output above.</div>';
@@ -344,6 +344,6 @@ async function liveRedirectCheck(){
 </script>
 </div>
 <footer class="site"><div class="wrap">
-Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
+Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · The paste path runs entirely in your browser; the optional live check sends the URL you type to a public proxy · No sign-up
 </div></footer>
 </body></html>

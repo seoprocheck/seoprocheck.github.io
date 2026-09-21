@@ -268,8 +268,8 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 function escH(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('timed out after '+ms/1000+'s')),ms))]);}
 async function proxyFetch(url){
+  // corsproxy.io answers 401 to every request, so it is not in the list any more.
   const tries=[
-    'https://corsproxy.io/?url='+encodeURIComponent(url),
     'https://api.allorigins.win/raw?url='+encodeURIComponent(url)
   ];
   let lastErr;
@@ -340,13 +340,13 @@ async function quickLiveCheck(){
   out.innerHTML='<div class="spc-info">Checking… (routed through a public CORS proxy)</div>';
   try{
     const r=await proxyFetch(url);
-    const finalUrl=r.headers.get('x-final-url')||url;
-    const ct=r.headers.get('content-type')||'(hidden by proxy)';
+    const ct=r.headers.get('content-type')||'(hidden by CORS)';
     let html='<div class="spc-preview-box"><table><tr><th>Check</th><th>Result</th></tr>';
-    html+='<tr><td>Reachable</td><td>✅ HTTP '+r.status+'</td></tr>';
-    html+='<tr><td>Final URL</td><td>'+escH(finalUrl)+(finalUrl.replace(/\/$/,'')!==url.replace(/\/$/,'')?' ⚠️ (redirected)':' ✅')+'</td></tr>';
+    html+='<tr><td>Fetched through the proxy</td><td>'+(r.status<400?'✅ yes':'❌ no')+'</td></tr>';
+    html+='<tr><td>Status shown</td><td>HTTP '+r.status+' (the proxy\'s status, not the target\'s)</td></tr>';
+    html+='<tr><td>Final URL</td><td>Not answerable from a browser</td></tr>';
     html+='<tr><td>Content-Type</td><td>'+escH(ct)+'</td></tr></table>';
-    html+='<div class="spc-info" style="margin-top:15px;">Browsers can’t read most cross-origin headers, so the live check is limited. For the full graded audit run <span class="spc-output" style="display:inline;padding:2px 8px;">curl -I '+escH(url)+'</span> and paste the output above.</div></div>';
+    html+='<div class="spc-info" style="margin-top:15px;">A browser cannot read another site\'s response headers, so the live check only tells you the page came back. For the real headers run <span class="spc-output" style="display:inline;padding:2px 8px;">curl -I '+escH(url)+'</span> and paste the output above, which grades every SEO-relevant header.</div></div>';
     out.innerHTML=html;
   }catch(e){
     out.innerHTML='<div class="spc-info">Live check failed ('+escH(e.message)+'). Run <code>curl -I '+escH(url)+'</code> and paste the output above for the full analysis.</div>';
@@ -355,6 +355,6 @@ async function quickLiveCheck(){
 </script>
 </div>
 <footer class="site"><div class="wrap">
-Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
+Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · The paste path runs entirely in your browser; the optional live check sends the URL you type to a public proxy · No sign-up
 </div></footer>
 </body></html>

@@ -289,6 +289,9 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="spc-output" id="hreflang-output" style="display:none;"></div>
 </div>
 <script>
+function attrEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 function addHreflangItem() {
     const container = document.getElementById('hreflang-items');
     const div = document.createElement('div');
@@ -302,7 +305,7 @@ function generateHreflang() {
         const code = item.querySelector('.hreflang-code').value;
         const url = item.querySelector('.hreflang-url').value;
         if (url) {
-            html += `<link rel="alternate" hreflang="${code}" href="${url}" />\n`;
+            html += `<link rel="alternate" hreflang="${attrEsc(code)}" href="${attrEsc(url)}" />\n`;
         }
     });
     document.getElementById('hreflang-output').style.display = 'block';

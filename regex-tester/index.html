@@ -249,7 +249,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <div class="spc-row">
     <div class="spc-field" style="flex:2;">
         <label>Regular Expression</label>
-        <input type="text" id="regex-pattern" placeholder="[a-z]+@[a-z]+\.[a-z]+" oninput="testRegex()">
+        <input type="text" id="regex-pattern" placeholder="[a-z]+@[a-z]+\.[a-z]+" oninput="testRegexDebounced()">
     </div>
     <div class="spc-field" style="flex:1;">
         <label>Flags</label>
@@ -262,11 +262,19 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 </div>
 <div class="spc-field">
     <label>Test String</label>
-    <textarea id="regex-test" placeholder="Enter text to test against the pattern..." style="min-height:120px;" oninput="testRegex()"></textarea>
+    <textarea id="regex-test" placeholder="Enter text to test against the pattern..." style="min-height:120px;" oninput="testRegexDebounced()"></textarea>
 </div>
 <div id="regex-results" style="margin-top:20px;"></div>
 </div>
 <script>
+function htmlEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+let regexTimer;
+function testRegexDebounced() {
+    clearTimeout(regexTimer);
+    regexTimer = setTimeout(testRegex, 250);
+}
 function testRegex() {
     const pattern = document.getElementById('regex-pattern').value;
     const testStr = document.getElementById('regex-test').value;
@@ -280,16 +288,17 @@ function testRegex() {
     if (document.getElementById('flag-m').checked) flags += 'm';
     try {
         const regex = new RegExp(pattern, flags);
-        const matches = testStr.match(regex);
+        // without the g flag, String.match returns capture groups too, which is not a match count
+        const matches = flags.includes('g') ? testStr.match(regex) : (regex.test(testStr) ? [testStr.match(regex)[0]] : null);
         let html = '';
         if (matches && matches.length > 0) {
             html = `<div class="spc-success">✅ ${matches.length} match${matches.length > 1 ? 'es' : ''} found</div>`;
             html += '<div class="spc-preview-box" style="margin-top:15px;"><strong>Matches:</strong><ul style="margin:10px 0 0 20px;">';
             matches.forEach((m, i) => {
-                html += `<li><code>${m}</code></li>`;
+                html += `<li><code>${htmlEsc(m)}</code></li>`;
             });
             html += '</ul></div>';
-            let highlighted = testStr.replace(regex, '<mark style="background:#815be0;color:#fff;padding:1px 3px;border-radius:3px;">$&</mark>');
+            let highlighted = htmlEsc(testStr).replace(new RegExp(regex.source, flags.includes('g') ? flags : flags + 'g'), m => `<mark style="background:#815be0;color:#fff;padding:1px 3px;border-radius:3px;">${m}</mark>`);
             html += '<div class="spc-preview-box" style="margin-top:15px;"><strong>Highlighted:</strong><div style="margin-top:10px;white-space:pre-wrap;">' + highlighted + '</div></div>';
         } else {
             html = '<div class="spc-error">❌ No matches found</div>';

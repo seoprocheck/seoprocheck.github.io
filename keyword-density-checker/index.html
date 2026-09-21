@@ -269,7 +269,8 @@ function checkDensity() {
     const keywordWords = keyword.split(/\s+/);
     let count = 0;
     if (keywordWords.length === 1) {
-        count = words.filter(w => w.includes(keyword)).length;
+        const esc = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        count = (content.match(new RegExp(`(^|[^\\p{L}\\p{N}_])${esc}(?=[^\\p{L}\\p{N}_]|$)`, 'giu')) || []).length;
     } else {
         const regex = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
         count = (content.match(regex) || []).length;
