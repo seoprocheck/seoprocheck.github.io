@@ -286,6 +286,10 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
         <label>Postal Code</label>
         <input type="text" id="lb-zip" placeholder="75001">
     </div>
+    <div class="spc-field">
+        <label>Country (two-letter code)</label>
+        <input type="text" id="lb-country" value="US" maxlength="2" placeholder="US">
+    </div>
 </div>
 <div class="spc-row">
     <div class="spc-field">
@@ -335,7 +339,7 @@ function generateLocalSchema() {
             "addressLocality": document.getElementById('lb-city').value,
             "addressRegion": document.getElementById('lb-state').value,
             "postalCode": document.getElementById('lb-zip').value,
-            "addressCountry": "US"
+            "addressCountry": (document.getElementById('lb-country').value.trim().toUpperCase() || 'US')
         },
         "telephone": document.getElementById('lb-phone').value,
         "url": document.getElementById('lb-url').value

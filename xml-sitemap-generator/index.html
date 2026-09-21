@@ -265,6 +265,15 @@ https://example.com/services/" style="min-height:200px;"></textarea>
         </select>
     </div>
     <div class="spc-field">
+        <label>Last modified</label>
+        <select id="sitemap-lastmod" onchange="document.getElementById('sitemap-lastmod-date').style.display=this.value==='date'?'block':'none'">
+            <option value="none">Leave it out</option>
+            <option value="today">Today</option>
+            <option value="date">Pick a date</option>
+        </select>
+        <input type="date" id="sitemap-lastmod-date" style="display:none;margin-top:8px;">
+    </div>
+    <div class="spc-field">
         <label>Default Priority</label>
         <select id="sitemap-priority">
             <option value="0.8">0.8 (High)</option>
@@ -289,13 +298,16 @@ function generateSitemap() {
     const urls = document.getElementById('sitemap-urls').value.split('\n').filter(u => u.trim());
     const freq = document.getElementById('sitemap-freq').value;
     const priority = document.getElementById('sitemap-priority').value;
-    const today = new Date().toISOString().split('T')[0];
+    // lastmod should be the date the page really changed, so it is left out unless you choose one
+    const lmMode = document.getElementById('sitemap-lastmod').value;
+    const lastmod = lmMode === 'today' ? new Date().toISOString().split('T')[0]
+                  : lmMode === 'date' ? document.getElementById('sitemap-lastmod-date').value : '';
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
     urls.forEach(url => {
         xml += '  <url>\n';
         xml += `    <loc>${xmlEsc(url.trim())}</loc>\n`;
-        xml += `    <lastmod>${today}</lastmod>\n`;
+        if (lastmod) xml += `    <lastmod>${lastmod}</lastmod>\n`;
         xml += `    <changefreq>${freq}</changefreq>\n`;
         xml += `    <priority>${priority}</priority>\n`;
         xml += '  </url>\n';
