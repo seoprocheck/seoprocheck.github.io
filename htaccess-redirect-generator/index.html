@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -321,6 +321,23 @@ function copyHtaccess() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator writes Apache <code>.htaccess</code> redirect rules for seven common jobs: a single 301 or 302 redirect, forcing HTTPS, adding or removing www, and adding or removing a trailing slash. The 301 and 302 options produce a one line <code>Redirect</code> directive from mod_alias. The other five produce a small mod_rewrite block that starts with <code>RewriteEngine On</code> and sends a 301. The tool does not test anything against your server; it prints text for you to paste.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Choose the rule in <strong>Redirect Type</strong>. The URL fields only show for the 301 and 302 options.</li>
+<li>For a single redirect, enter the <strong>Old URL Path</strong> as a path that starts with a slash, such as /old-page/, and the <strong>New URL</strong> as a full address.</li>
+<li>Click <strong>Generate Code</strong>, then <strong>Copy</strong>.</li>
+<li>Download a backup of your current .htaccess, paste the rule in, and test the old URL in a browser or with a header checker.</li>
+</ol>
+<h2>How Apache will read these rules</h2>
+<p>A <code>Redirect</code> line matches the old path as a prefix, on whole path segments. <code>Redirect 301 /blog /news</code> also sends /blog/post-1 to /news/post-1, and query strings carry over. That is often what you want in a migration, but not if you meant one page only. The old path is case sensitive and must not include the domain; a full URL there will never match.</p>
+<p>The Force WWW and Remove WWW rules always redirect to https://, so use them only on a site that already has a working certificate. If you stack either of them with Force HTTPS, put the www rule first; in the other order, a visit to http://example.com can take two hops. Apache also does not promise to run mod_alias and mod_rewrite lines in the order they appear, so test when you mix them. A syntax error in .htaccess usually returns a 500 error for every URL the file covers, and Nginx ignores .htaccess entirely.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/redirects-status-codes/301-vs-302-redirects/">301 vs 302 Redirects: When to Use Each (and Why It Matters)</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

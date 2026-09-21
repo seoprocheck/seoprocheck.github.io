@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -284,6 +284,23 @@ function copyCanonical() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator writes one line of HTML: a &lt;link rel="canonical"&gt; element pointing at the URL you enter. It escapes characters that would break the attribute, so an ampersand in a query string becomes &amp;amp; and a double quote becomes &amp;quot;, which is correct HTML. That is the whole job. It does not fetch the URL, confirm it loads, or check whether it is absolute, lowercase or consistent with your trailing slash style. The only validation is that the field is not empty. Everything runs in your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Enter the preferred address of the page in Canonical URL, including https:// and the full domain.</li>
+<li>Click Generate Tag. The finished element appears in the output box.</li>
+<li>Click Copy, then paste the line inside the &lt;head&gt; of every duplicate or variant page, and on the preferred page itself as a self-reference.</li>
+<li>View the page source afterward to confirm there is exactly one canonical tag.</li>
+</ol>
+<h2>Mistakes to avoid with canonical tags</h2>
+<p>Google only honors rel="canonical" when it sits in the &lt;head&gt;, and it recommends absolute URLs over relative paths. Because this tool accepts whatever you type, a relative path like /page/ will still produce a tag, so double-check the field. Point the canonical at a URL that returns 200 and is indexable; a target that redirects, returns 404 or carries noindex sends mixed signals. Two canonical tags on one page, often one from a theme and one from an SEO plugin, can lead Google to ignore both.</p>
+<p>Keep in mind that a canonical is a strong hint, not a command. If internal links, sitemaps and redirects all favor a different URL, Google may choose that one instead. The box on the tool page lists common uses such as parameter URLs and HTTP versus HTTPS duplicates.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/redirects-status-codes/canonical-tags-complete-reference/">Canonical Tags: The Complete Reference</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -305,6 +305,23 @@ function showResult(ts, date) {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This converter translates between Unix time (the number of seconds since January 1, 1970, UTC) and a calendar date. It also accepts millisecond and microsecond values. Each conversion also shows the same moment four ways: the Unix value, ISO 8601 in UTC, the UTC string used in HTTP headers (labeled RFC 2822), and your local time. The date field uses your browser's time zone, and everything is calculated on your device.</p>
+<h2>How to use it</h2>
+<ol>
+<li>To read a timestamp, paste the number into <strong>Unix Timestamp</strong> and click <strong>Timestamp → Date</strong>.</li>
+<li>To get a timestamp, pick a date and time in <strong>Human Readable</strong> and click <strong>Date → Timestamp</strong>.</li>
+<li>To start from now, click <strong>Set Current Time</strong>. Both fields fill in and the table appears.</li>
+<li>Copy the format you need from the results table.</li>
+</ol>
+<h2>Seconds, milliseconds and time zones</h2>
+<p>The tool reads the unit from the length of the number. Exactly 13 digits is treated as milliseconds and exactly 16 as microseconds, the unit the GA4 export to BigQuery uses for event_timestamp, and both are brought back to seconds; the table's Unix Timestamp row shows that seconds value. Every other length is read as seconds. That is right for normal timestamps, but a 19 digit nanosecond value, or a millisecond value from before September 2001 (only 12 digits), gives a wrong date, so convert those yourself.</p>
+<p>The Human Readable picker works in your local time zone and stops at minutes. A date you enter is read as local time, so the same inputs give different timestamps on computers in different zones, and the seconds are always zero. When you convert a timestamp to a date, the picker drops the seconds, but the table keeps them. For anything you publish, such as a sitemap lastmod value or a datePublished in structured data, copy the ISO 8601 row: it is in UTC and carries the Z marker, so there is no ambiguity about the zone.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/technical-seo/log-file-analysis-seo/">Server Log File Analysis for SEO: Reading What Googlebot Actually Does on Your Site</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

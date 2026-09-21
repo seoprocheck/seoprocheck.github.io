@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -295,6 +295,23 @@ function copyMetaRobots() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator builds a single robots meta tag from checkboxes. You pick the indexing and link rules, add any of four extra directives, set an optional snippet length, and it writes a line like &lt;meta name="robots" content="noindex, follow" /&gt; that you can paste into the &lt;head&gt; of a page, all without leaving your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Under Indexing Directives, choose index or noindex, and follow or nofollow. If you tick both of a pair, the restrictive one wins: noindex beats index, nofollow beats follow.</li>
+<li>Under Additional Directives, tick noarchive, nosnippet, noimageindex or notranslate if you need them.</li>
+<li>To cap the text snippet, type a number in "Max Snippet Length". Use -1 for no limit or 0 for no text snippet.</li>
+<li>Click "Generate Tag", then "Copy".</li>
+</ol>
+<h2>Choosing the right combination</h2>
+<p>Index and follow are what search engines assume when there is no tag at all, so the default output of "index, follow" changes nothing. It is safe, just redundant. The tag earns its place when you need a restriction, most often noindex on thin, private or duplicate pages. For noindex to work, crawlers must be able to fetch the page: if robots.txt blocks the URL, they never see the tag. If you combine directives that conflict, such as nosnippet with a max-snippet value, Google applies the more restrictive one. Google no longer offers cached copies of pages, so noarchive mainly matters to other search engines.</p>
+<p>The tool writes one tag for all crawlers under the name "robots". It does not generate crawler-specific tags such as googlebot, other preview limits such as max-image-preview, or the X-Robots-Tag HTTP header you need for PDFs and other non-HTML files. The number field is not range checked, so type a sensible value. If no box is ticked and the length is empty, the tag comes out with an empty content value, which does nothing.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/seo-checks/indexation/has-noindex-and-nofollow-directives/">Noindex and Nofollow Together: When It Is Right and When It Hurts</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

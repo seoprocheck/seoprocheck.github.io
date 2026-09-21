@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -319,6 +319,24 @@ function copyHreflang() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool turns a list of language versions into hreflang link tags for the <code>&lt;head&gt;</code> of your pages. Each row pairs a language or language-region code with a URL, and the output is one <code>&lt;link rel="alternate"&gt;</code> element per row, carrying the code and the URL, under a short HTML comment. It escapes quotes and angle brackets in the values. It does not visit the URLs, so it cannot confirm the pages exist or that they link back to each other. It runs in your browser only.</p>
+<h2>How to use it</h2>
+<ol>
+<li>In the first row, choose a <strong>Language-Region Code</strong> and enter the full <strong>Page URL</strong> for that version, including https://.</li>
+<li>Click <strong>+ Add Language</strong> for each extra version. New rows start at "en" with an empty URL.</li>
+<li>Add a row with <strong>x-default</strong> for the page that should serve everyone else, such as a language picker or your main version.</li>
+<li>Click <strong>Generate Tags</strong>, then <strong>Copy</strong>.</li>
+<li>Paste the same complete block into the head of every page in the set.</li>
+</ol>
+<h2>Rules the tags only work with</h2>
+<p>Google ignores hreflang pairs that are not confirmed from both sides. If the English page points to the Spanish page, the Spanish page must point back. That is why the whole block, including the line for the page itself, belongs on every version. Use absolute URLs, and point each tag at the canonical address of that version, not at a redirecting or parameter URL.</p>
+<p>The menu offers 21 codes. If you need another language or region, edit the output by hand, using an ISO 639-1 language code and, optionally, an ISO 3166-1 alpha-2 region code (en-GB, not en-UK). There is no delete button: a row with an empty URL is skipped, so clear the URL to drop it. The tool also does not warn about duplicate codes, so check the list before you copy.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/international-seo/hreflang-implementation-errors/">Hreflang Implementation Without the Errors: Return Tags, x-default, and Why Most Setups Silently Break</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

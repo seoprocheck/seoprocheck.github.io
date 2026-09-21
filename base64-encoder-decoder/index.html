@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -281,6 +281,23 @@ function copyBase64() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool converts text to Base64 and back. Encoding first turns your text into UTF-8 bytes, so accented letters, non-Latin scripts and emoji survive the round trip. Decoding does the reverse and expects the result to be readable UTF-8 text. It works on text you type or paste; there is no file upload, so it cannot turn an image into a data URI. Both directions run in your browser, and nothing is sent anywhere.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Paste plain text or a Base64 string into <strong>Input</strong>.</li>
+<li>Click <strong>Encode</strong> to turn text into Base64, or <strong>Decode</strong> to turn Base64 back into text. The tool does not guess which one you want.</li>
+<li>Read the result in the <strong>Output</strong> box, which is read only.</li>
+<li>Click <strong>Copy Result</strong> to put the output on your clipboard.</li>
+</ol>
+<h2>When decoding fails</h2>
+<p>Any decoding failure shows the same message, "Invalid Base64 string", and there are three usual causes. First, the input uses the URL-safe alphabet, with - and _ in place of + and /. JWT segments use this variant, and so do some URL parameters; swap those characters back before decoding. Second, the characters are not Base64 at all, for example a stray quote or part of a URL copied along with it. Third, the Base64 is valid but the bytes inside are not text: an encoded image or PDF cannot be shown as UTF-8, so the tool reports an error even though the string itself is fine.</p>
+<p>Two things to keep in mind when you encode. Base64 output is about a third larger than the input, because every three bytes become four characters, which is why large images embedded as data URIs bloat HTML and CSS. And Base64 is an encoding, not encryption: anyone can reverse it in a second, so it offers no protection for passwords or personal data.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/seo-checks/performance/efficiently-encode-images/">Efficiently Encode Images: Compress Without Killing Quality</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

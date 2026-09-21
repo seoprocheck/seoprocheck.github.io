@@ -41,7 +41,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -313,6 +313,24 @@ function copyOG() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator writes the Open Graph meta tags that Facebook, LinkedIn and many chat apps read when someone shares your link. You fill in a title, description, page URL, image URL, type, site name and, optionally, a locale, and it returns a block of <code>&lt;meta property="og:..."&gt;</code> tags to paste into your page's <code>&lt;head&gt;</code>. Quotes, ampersands and angle brackets in your text are escaped so they cannot break the attributes. The tool does not fetch your page or image, so it shows no preview.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Enter the <strong>Page Title</strong> and a short <strong>Description</strong> for the share card.</li>
+<li>Paste the canonical <strong>Page URL</strong>.</li>
+<li>Paste an absolute <strong>Image URL</strong>. The label suggests 1200 by 630 pixels, a common size for link previews.</li>
+<li>Choose a <strong>Type</strong> (website, article, product or profile), add your <strong>Site Name</strong>, and fill <strong>Locale</strong> if the page is not US English.</li>
+<li>Click <strong>Generate Tags</strong>, then <strong>Copy</strong>, and paste the block into the head of that page.</li>
+</ol>
+<h2>What the output includes, and what it leaves out</h2>
+<p>og:title, og:description, og:url and og:type are always written, even when a field is empty, so an empty box produces an empty content attribute. og:image, og:site_name and og:locale are written only when you fill them in. The Open Graph protocol treats title, type, image and URL as the basic required set, so do not skip the image.</p>
+<p>The Open Graph protocol treats a missing <code>og:locale</code> as en_US, so set the Locale field for other languages or regions, for example fr_FR or en_GB. The tool writes the type and nothing more, none of the extra properties such as article:published_time, and no Twitter card tags. X reads Open Graph as a fallback for the title, description and image, and uses a twitter:card tag to choose the card layout, so add that line yourself if you want the large image card. Platforms cache previews, so after changing tags, refresh them with the platform's own sharing debugger.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/on-page-seo/title-tags-meta-descriptions-guide/">Title Tags and Meta Descriptions: The Complete Guide</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

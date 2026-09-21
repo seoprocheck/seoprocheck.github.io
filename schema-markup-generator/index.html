@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -319,6 +319,24 @@ function copySchema() {
 updateSchemaFields();
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator builds a single block of JSON-LD for one of six schema.org types: Article, LocalBusiness, Product, Organization, Person or WebPage. You fill in plain text fields, and it returns the markup already wrapped in a <code>&lt;script type="application/ld+json"&gt;</code> tag, ready to paste into your page. Empty fields are left out. A few properties get nested for you: an Article author becomes a Person object and a publisher an Organization, a Product brand becomes a Brand object, and price, currency and availability move into an Offer. Everything runs in your browser and nothing is sent to a server.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Pick a type in the <strong>Schema Type</strong> menu. The fields below change to match, and anything you typed before is cleared.</li>
+<li>Fill in only the fields you have real values for. Use ISO 8601 dates such as 2026-09-21 for Date Published and Last Reviewed.</li>
+<li>Click <strong>Generate Schema</strong> to see the output.</li>
+<li>Click <strong>Copy JSON-LD</strong> and paste the whole block into the page's HTML.</li>
+<li>Run the page through Google's Rich Results Test or the Schema Markup Validator before you ship it.</li>
+</ol>
+<h2>Edit these before you publish</h2>
+<p>For Article, type your organization's name into Publisher; if you leave it blank, the output has no publisher at all. For Product, type availability in schema.org's own capitalization, such as InStock or OutOfStock: the tool adds the https://schema.org/ prefix and removes spaces, but it does not fix lowercase. Enter the price as a bare number and the currency as a three letter code like USD.</p>
+<p>For LocalBusiness, the address goes out as one text string, while Google's local business documentation describes a PostalAddress with separate street, city and postal code parts. Google also suggests the most specific business subtype (Restaurant, Dentist) over the generic type. The tool does no validation, so a typo in a URL or date passes straight through.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/technical-seo/validate-debug-structured-data-rich-results/">How to Validate and Debug Structured Data When Rich Results Fail to Show</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

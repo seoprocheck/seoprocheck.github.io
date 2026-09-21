@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -313,6 +313,24 @@ function findContentGaps() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool compares your text against a fixed checklist of common search angles and tells you which ones you have not touched. You give it a topic and your content. It then checks a built-in list of modifiers (what is, how to, examples, mistakes, tools, checklist, vs and others) and marks each one covered if that modifier appears as a whole word or phrase anywhere in your text. The rest are shown as gaps, phrased as modifier plus topic. It also lists up to six question stubs. It does not look at search results, competitor pages or keyword volumes; everything is computed in your browser from what you paste.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Type your main subject into <strong>Your Main Topic/Keyword</strong>, for example "technical seo".</li>
+<li>Paste the article, or a list of the subtopics you cover, into <strong>Your Current Content</strong>.</li>
+<li>Click <strong>Find Content Gaps</strong>.</li>
+<li>Read the two totals (Topics Covered and Potential Gaps), then the gap suggestions, the question prompts and the covered list.</li>
+</ol>
+<h2>How to read the results</h2>
+<p>The match looks for whole words, so "tools" is not found inside "stools", and "guides" does not count as "guide". It is still generous: if the word "tools" appears once anywhere, the tools angle counts as covered even if you never discuss tools for this topic. Treat "covered" as "mentioned", and read the section yourself.</p>
+<p>Topics that include the word "seo" get a 16 item SEO list; every other topic gets a general 17 item list. Only the first 10 gaps are displayed. The suggestions are templates, so "vs technical seo" or "for beginners technical seo" need rewriting into real queries before they go in a brief.</p>
+<p>The question prompts are simpler still. If your topic phrase never appears in the text, all question words are flagged, and only the first six are shown. Use them as a reminder to check People Also Ask and your Search Console queries for the actual questions people type.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/articles/keyword-research/content-gap-analysis-methodology/">Content Gap Analysis Methodology</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

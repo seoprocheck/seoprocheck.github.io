@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -261,7 +261,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
     </div>
     <div class="spc-field">
         <label>Video file URL (contentUrl)</label>
-        <input type="url" id="video-url" placeholder="https://youtube.com/embed/...">
+        <input type="url" id="video-url" placeholder="https://example.com/videos/demo.mp4">
     </div>
 <div class="spc-field">
     <label>Embed URL (the player address, optional)</label>
@@ -310,6 +310,24 @@ function copyVideoSchema() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool writes VideoObject structured data for one video. It takes a title, description, thumbnail URL, video file URL, an optional embed URL, upload date and duration, and returns a JSON-LD block wrapped in a <code>&lt;script type="application/ld+json"&gt;</code> tag. Any field you leave blank is dropped from the output. The page does not fetch your video or thumbnail, so it cannot tell whether the URLs work; it only formats what you type, locally in your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Enter the <strong>Video Title</strong> and a <strong>Description</strong> that match what viewers see on the page.</li>
+<li>Paste the full <strong>Thumbnail URL</strong> of an image Google can crawl.</li>
+<li>Paste the address of the media file itself into <strong>Video file URL (contentUrl)</strong>, and the player address into <strong>Embed URL</strong> if you have one.</li>
+<li>Pick the <strong>Upload Date</strong> and type the <strong>Duration</strong> in ISO 8601 form, for example PT5M30S for five minutes thirty seconds or PT1H2M for an hour and two minutes.</li>
+<li>Click <strong>Generate Schema</strong>, then <strong>Copy JSON-LD</strong>, and paste the block into the page that hosts the video.</li>
+</ol>
+<h2>Get the URLs and the date right</h2>
+<p>The two URL fields map to properties that mean different things: contentUrl should point at the actual media file (an .mp4, for example), and embedUrl at a player. A YouTube or Vimeo link is a player, not a file, so put it in Embed URL and leave the file field empty. If you host the file yourself, you can fill both.</p>
+<p>The date picker gives you a date with no time or time zone. Google's video documentation asks for uploadDate in ISO 8601 and recommends including time zone information, so you may want to extend it to something like 2026-09-21T08:00:00-05:00. Google lists name, thumbnailUrl and uploadDate as required, so fill those three at minimum. Duration is not checked, so a typo such as 5M30S without the PT prefix will pass through unnoticed.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/schema-guides/video-seo-videoobject-schema/">Video SEO and VideoObject Schema: The Complete Guide</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

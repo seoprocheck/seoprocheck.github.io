@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -66,6 +66,23 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="/reading-level-checker/" data-name="reading level checker assess readability / reading grade level of your text."><h3>Reading Level Checker</h3><p>Assess readability / reading grade level of your text.</p></a>
 <a class="card" href="/content-gap-finder/" data-name="content gap finder spot topical gaps against target keywords."><h3>Content Gap Finder</h3><p>Spot topical gaps against target keywords.</p></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>Check what a page actually says</h2>
+<p>These six tools look at the words on a page rather than the code around it: how long it is, how it is structured, how easy it is to read, how often it repeats a keyword and which common questions it leaves out. You paste your text or HTML and get the result right away, and nothing is sent anywhere.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="/serp-preview-tool/">SERP Preview Tool</a>: see how your title and meta description may look in Google results, with character counts as you type.</li>
+<li><a href="/word-counter/">Word Counter</a>: count words, characters, sentences and paragraphs, with reading and speaking time.</li>
+<li><a href="/keyword-density-checker/">Keyword Density Checker</a>: count how often a keyword or phrase appears and flag heavy repetition.</li>
+<li><a href="/heading-analyzer/">Heading Structure Analyzer</a>: see your H1 to H6 headings as an outline, with a missing or extra H1 and skipped levels flagged.</li>
+<li><a href="/reading-level-checker/">Reading Level Checker</a>: get a Flesch-Kincaid grade level and a Flesch Reading Ease score.</li>
+<li><a href="/content-gap-finder/">Content Gap Finder</a>: check a draft against common angles for a topic, such as what is, how to, versus and mistakes, and get questions you could add.</li>
+</ul>
+<p>The Heading Structure Analyzer needs HTML, so paste the page source rather than the visible text. Treat density and reading scores as prompts to reread a passage, not as targets to hit. The Content Gap Finder works from a fixed list of question patterns, not from competitor pages, so use it for ideas, then look at the pages that rank for your topic before you add new sections.</p>
+<p class="related">For more on how to run a content gap analysis, read <a href="https://seoprocheck.com/articles/keyword-research/content-gap-analysis-methodology/">Content Gap Analysis Methodology</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

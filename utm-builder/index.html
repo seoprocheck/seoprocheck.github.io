@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -320,6 +320,23 @@ function clearUTM() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This builder adds UTM campaign parameters to a URL so analytics tools can attribute the visits it brings. You enter the landing page and up to five values, and it writes utm_source, utm_medium, utm_campaign, utm_term and utm_content onto the address, URL-encoding each value. The result updates as you type, and no data is sent anywhere.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Paste the landing page into "Website URL". Nothing appears until this field has something in it.</li>
+<li>Fill in "Campaign Source" (where the link lives, such as newsletter), "Campaign Medium" (the type of channel, such as email) and "Campaign Name".</li>
+<li>Add "Campaign Term" for paid keywords and "Campaign Content" to tell apart two links in the same message, if you need them.</li>
+<li>Copy the finished link from "Generated URL" with "Copy URL". "Clear All" empties every field.</li>
+</ol>
+<h2>Keeping campaign data clean</h2>
+<p>Source, medium and name carry asterisks, but the tool does not enforce them: any field you skip is simply left out. Fill all three, since reports are hard to read without them. Values keep your capitalization, and analytics tools such as GA4 treat "Email" and "email" as two different values, so settle on lowercase. Spaces become %20 and symbols such as &amp; and + are encoded, so the link stays valid and reports show exactly what you typed. If your URL already has a query string, the tool joins with &amp;. If it has a #fragment, the tool slots the parameters in before it, where a query string belongs, and keeps the fragment at the end.</p>
+<p>In GA4, the medium value helps decide the default channel a visit lands in, so standard terms like email, cpc or social keep traffic where you expect it. Use UTM links only on other sites, emails and ads. Tagging links between your own pages replaces the visitor's real source with your tag.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/lexicon/glossary-analytics/utm-parameters/">UTM Parameters</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -297,6 +297,24 @@ function copyFaqSchema() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator turns your questions and answers into FAQPage structured data in JSON-LD format. Each filled pair becomes a Question item with an acceptedAnswer, and all of them sit inside one FAQPage object wrapped in a ready-to-paste &lt;script type="application/ld+json"&gt; block. Quotes and other special characters in your text are escaped for you. Everything happens in your browser, so nothing you type is sent anywhere. It does not look at your page and does not test the result against Google's rules; it formats what you give it.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Type the first question into the Question 1 field and its answer into Answer 1.</li>
+<li>Click + Add Question for each extra pair. New Question and Answer fields appear below, numbered in order.</li>
+<li>Click Generate Schema. The finished script block shows up in the output box under the buttons.</li>
+<li>Click Copy JSON-LD and paste the block into the page's HTML, in the &lt;head&gt; or the body.</li>
+<li>Run the live page through Google's Rich Results Test or the Schema Markup Validator before you call it done.</li>
+</ol>
+<h2>Before you paste it into your site</h2>
+<p>A pair only makes it into the output when both its question and its answer are filled in. Blank pairs are dropped without a warning, and there is no delete button, so clear a pair's fields if you want it gone. If every field is empty, you still get an FAQPage with an empty list, so look at the output before copying it.</p>
+<p>The questions and answers in the markup must also be visible to readers on the page. FAQPage is meant for questions your site answers itself; forum threads where users post answers call for QAPage instead. Keep expectations realistic too: Google stopped showing FAQ rich results for most sites in 2023, so treat the markup as a description of the page rather than a route to a bigger search listing.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/schema-guides/faq-schema/">FAQ Schema: When to Use It (and What Changed in 2023)</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

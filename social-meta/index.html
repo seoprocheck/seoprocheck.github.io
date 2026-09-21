@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -64,6 +64,21 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="/meta-tags-generator/" data-name="meta tags generator generate title, description and meta tags for any page."><h3>Meta Tags Generator</h3><p>Generate title, description and meta tags for any page.</p></a>
 <a class="card" href="/social-preview-tool/" data-name="social media preview preview how your link renders across social platforms."><h3>Social Media Preview</h3><p>Preview how your link renders across social platforms.</p></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>Control how your links look when shared</h2>
+<p>When someone shares your page on Facebook, LinkedIn or X, the title, description and image come from tags in your page head. If those tags are missing, the platform picks something on its own, which may not be the text or image you would choose. These four tools write those tags and show you a preview before you publish.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="/open-graph-generator/">Open Graph Generator</a>: write the og: tags that Facebook, LinkedIn and other apps read, including a share image (the tool suggests 1200 by 630 pixels).</li>
+<li><a href="/twitter-card-generator/">Twitter Card Generator</a>: choose a summary card or a large image card for X and add your @username.</li>
+<li><a href="/meta-tags-generator/">Meta Tags Generator</a>: produce a starter head block with charset, viewport, title, description, canonical and robots tags.</li>
+<li><a href="/social-preview-tool/">Social Media Preview</a>: see a mockup of your link on Facebook, LinkedIn and X as you type.</li>
+</ul>
+<p>For the search result itself, use the <a href="/serp-preview-tool/">SERP Preview Tool</a> in Content Analysis. The previews are mockups, not screenshots, and platforms cache link previews, so after you change your tags, ask the platform to fetch the page again with its own tool, such as Facebook's Sharing Debugger. In the Meta Tags Generator, pick a noindex robots option for any page you want kept out of search. Google has said it does not use the keywords meta tag, so you can leave that field empty.</p>
+<p class="related">For how to write the title and description these tags carry, read <a href="https://seoprocheck.com/on-page-seo/title-tags-meta-descriptions-guide/">Title Tags and Meta Descriptions: The Complete Guide</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

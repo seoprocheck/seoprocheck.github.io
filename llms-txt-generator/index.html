@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -308,6 +308,24 @@ function downloadLLMsTxt() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool assembles a basic llms.txt file from five fields. The output is plain Markdown: your site name as an H1 heading, your description as a blockquote, then optional "Topics", "Important Pages" and "Contact" sections written as bullet lists. You can copy the text or download it as a file named llms.txt. It runs in your browser and never contacts your site.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Type your site's name into Site Name. It becomes the H1 line, which is the one element the llms.txt proposal requires.</li>
+<li>Write one or two plain sentences in Site Description saying what the site covers and who it is for.</li>
+<li>Add a few subjects to Key Topics, separated by commas. Each one becomes its own bullet.</li>
+<li>List your most useful pages in Important Pages, one full URL per line. Add a Contact Email if you want one listed.</li>
+<li>Click "Generate llms.txt", read the result, then use Copy or Download and upload the file to the root of your site so it answers at /llms.txt.</li>
+</ol>
+<h2>Before you publish it</h2>
+<p>The generator is deliberately simple. It does not check that fields are filled in, so an empty name produces a heading with nothing after it. It also lists your pages as bare URLs. The proposal at llmstxt.org describes each entry as a Markdown link with a short note, such as "- [Pricing](https://example.com/pricing): plans and limits", so it is worth editing each line into that form by hand. The proposal does not define Topics or Contact sections; they are extras this tool adds.</p>
+<p>Keep expectations honest, too. llms.txt is a community proposal, and no major AI search or answer engine has shown that it fetches the file or uses it. Publish it as cheap housekeeping if you like, but do not count on it to change how AI tools see your site.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/research/ai-search/llms-txt-explained/">llms.txt Explained: What It Is and Whether You Need One</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

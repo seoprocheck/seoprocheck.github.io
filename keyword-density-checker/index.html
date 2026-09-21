@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -294,6 +294,23 @@ function checkDensity() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This checker counts how often a target keyword appears in text you paste and expresses it as a share of all words. The math is occurrences times the number of words in the keyword, divided by the total word count, times 100, shown to two decimal places. For a one-word keyword it counts whole words only, so "seo" will not match inside "seoprocheck". For a phrase it looks for that exact sequence of characters, which can match inside a longer word and misses the phrase when a line break separates its words. Plurals, synonyms and other variants are not counted. It all runs in your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Type the term into Target Keyword. Capitalization does not matter.</li>
+<li>Paste the body copy into Content. Leave out menus, footers and HTML tags, because every whitespace-separated chunk counts as a word.</li>
+<li>Click Analyze Density.</li>
+<li>Read the large percentage and the table of Keyword, Occurrences, Total Words and Density.</li>
+</ol>
+<h2>How to read the result</h2>
+<p>The label under the number comes from fixed thresholds in the code: below 0.5% is Too Low, above 2.5% is Too High (Keyword Stuffing Risk), and 0.5% to 2.5% is Good. The note under the result calls that range a rule of thumb for a primary keyword, not a target. That matches reality: Google has never published an ideal density, and its spam policies name keyword stuffing, meaning filling a page with repeated terms in ways that read unnaturally, as a violation.</p>
+<p>Use a high number as a prompt to reread the copy aloud and replace forced repeats with pronouns or related terms. A low number is rarely a problem on its own if the page clearly covers the topic.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/lexicon/glossary-content-seo/keyword-density/">Keyword Density</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

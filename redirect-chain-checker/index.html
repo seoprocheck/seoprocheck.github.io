@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -343,6 +343,24 @@ async function liveRedirectCheck(){
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool reads the headers that curl prints while it follows a redirect chain and turns them into a hop-by-hop table: hop number, status code, and where each hop points next. It counts the 3xx hops and gives a verdict. When there are two or more redirects and you filled in the URL field, it also writes an Apache .htaccess line that sends the old path straight to the final address. The parsing runs in your browser. The separate Quick Live Check sends your URL to a public CORS proxy (allorigins.win) and can only confirm that the page loads through that proxy. A browser cannot read another site's redirect status codes or Location headers, so that button cannot show the chain.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Enter the starting address in the URL field.</li>
+<li>In a terminal, run curl -sIL followed by that address. The -I flag asks for headers only and -L follows each redirect.</li>
+<li>Paste the whole output, including every HTTP/ status line, into the large box.</li>
+<li>Click Analyze Chain and read the table and the Verdict line.</li>
+<li>If you only want to know whether the address responds at all, use Quick Live Check instead.</li>
+</ol>
+<h2>Reading the verdict</h2>
+<p>Zero redirects means the address answers directly. One redirect is normal for a moved page, as long as it is a 301 or 308 rather than a temporary 302 or 307. Two or more means a chain: each extra hop adds a round trip for visitors and another request for crawlers. Google documents following up to 10 hops, but shorter is better, so point the first redirect at the final URL and update internal links as well.</p>
+<p>Before using the generated rule, confirm the last hop returns 200. It is a RedirectMatch rule anchored to that exact path plus an optional trailing slash, and it matches on the path alone. On nginx, a CDN or a redirect plugin, write the equivalent in that system instead.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/redirects-status-codes/redirect-chains-and-loops/">Redirect Chains and Loops: Why They Hurt and How to Fix Them</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · The paste path runs entirely in your browser; the optional live check sends the URL you type to a public proxy · No sign-up
 </div></footer>

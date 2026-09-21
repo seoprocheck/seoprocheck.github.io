@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -312,6 +312,23 @@ function copyLorem() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator produces Lorem Ipsum placeholder text for wireframes, mockups and template testing. It draws random words from the familiar "lorem ipsum dolor sit amet" passage and strings them into paragraphs, sentences or a plain run of words. Because the words are picked at random each time, the text does not always open with "Lorem ipsum". It runs in your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Enter a number in the "Number of Paragraphs" box. Despite the label, it sets the count for whichever Type you choose.</li>
+<li>Pick a Type: Paragraphs, Sentences or Words.</li>
+<li>Click Generate. The text appears in the output box below.</li>
+<li>Click Copy to put it on your clipboard, then paste it into your design or CMS.</li>
+</ol>
+<h2>What the output looks like</h2>
+<p>Each sentence holds 8 to 17 words, starts with a capital letter and ends with a period; there are no commas or other punctuation. In Paragraphs mode each paragraph gets 4 to 7 of those sentences, separated by a blank line. Sentences mode returns the requested number of sentences in one block, and Words mode returns lowercase words with no punctuation at all. The output is plain text, so you will need to add &lt;p&gt; tags yourself if you paste into raw HTML. The count is held between 1 and 20: a blank or invalid entry is treated as 1, anything higher is cut to 20, and the box is updated to show the number used, which also caps Words mode at 20 words.</p>
+<p>The real risk with placeholder text is that it ships. Before launch, search the site and its templates for "lorem" and "ipsum", and keep staging copies behind a password rather than relying on robots.txt, so unfinished pages never end up in search results. Pages full of filler give visitors and search engines nothing useful.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/evergreen/technical-seo-glossary/crawlability-and-indexation/managing-staging-environment-seo-risks/">Managing Staging Environment SEO Risks</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

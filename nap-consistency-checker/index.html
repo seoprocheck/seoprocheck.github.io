@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -290,8 +290,10 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 </div>
 <script>
 function normalizeText(text) {
+    // fold accents, then keep letters and digits in any script (not just a to z),
+    // so two different names in Japanese or Greek no longer both reduce to nothing
     return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
-        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/[^\p{L}\p{N}\s]/gu, '')
         .replace(/\s+/g, ' ')
         .trim();
 }
@@ -343,6 +345,23 @@ function clearNAPCheck() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This checker compares one business listing against your official name, address and phone number (NAP) and tells you field by field whether they match. It is built for citation clean-up: you copy the details from a directory, map listing or social profile and see at once which field differs. The comparison runs in your browser and nothing is looked up online, so you supply both sides yourself.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Under "Primary NAP (Your official listing)", fill in Business Name, Phone and Address exactly as they appear on your website or main profile.</li>
+<li>Under "Citation to Check", paste the Name, Phone and Address shown on the listing you are auditing.</li>
+<li>Click "Check Consistency". A banner says whether everything matches, and a table shows Match or Mismatch for each field with both values side by side.</li>
+<li>Click "Clear" to empty the citation fields and check the next listing. Your primary details stay in place.</li>
+</ol>
+<h2>How the comparison works</h2>
+<p>Names and addresses are lowercased, stripped of punctuation and extra spaces, then compared exactly. So "Main St." and "main st" match, but "Main St" and "Main Street" do not, and neither do "Suite 100" and "Ste 100". Accents are folded to plain letters first, so "Café" and "Cafe" match, while letters in other scripts, such as Greek or Japanese, are compared as written. Phone numbers are reduced to digits, so formatting like brackets and dashes does not matter, but a leading country code does: "+1 555 123 4567" will not match "555 123 4567". Two empty fields count as a match.</p>
+<p>Treat a mismatch as a prompt to look, not a verdict. An abbreviation may be harmless, while a wrong suite number or an old phone number is worth correcting at the source. The goal is that customers, directories and search engines find the same details everywhere your business is listed.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/lexicon/glossary-local-seo/nap/">NAP (Name, Address, Phone)</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -306,6 +306,24 @@ function updateSocialPreview() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool mocks up how a shared link might look as a card on Facebook or LinkedIn and on X (Twitter). You type a title, description, URL and image address, and both previews update as you type. It is a drafting aid: it does not fetch your page or read its Open Graph tags, and it does not write any tags for you. The only thing it loads is the image, which your browser requests straight from the address you give.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Enter the headline you plan to use in og:title in the Title field.</li>
+<li>Add your og:description text in Description. Both cards show only its first 100 characters.</li>
+<li>Type the page address in URL. The cards show just the domain, taken from the address with the protocol and path removed.</li>
+<li>Paste a full image address into Image URL to see it fill the top of each card.</li>
+<li>Adjust the wording until both cards read well, then put the final values into your page's og: and twitter: meta tags.</li>
+</ol>
+<h2>Where the mockup and the real card differ</h2>
+<p>The previews are simplified. Each image is cropped to fill a fixed box 150 pixels tall, so it will not show the exact framing a platform uses; for link cards, a landscape image around 1.91:1, such as 1200 by 630 pixels, is the usual choice. The title is never shortened here, while the real networks cut long titles to fit their layouts, and those layouts change from time to time. If you clear the Image URL box, the previous picture stays until you reload the page.</p>
+<p>The real test happens after publishing. Networks read the tags from your live page and cache what they find, so run the URL through Facebook's Sharing Debugger or LinkedIn's Post Inspector to see their version and refresh the cache after you change anything. X falls back to Open Graph tags when twitter: tags are missing.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/on-page-seo/image-seo-complete-guide/">Image SEO: The Complete Guide</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

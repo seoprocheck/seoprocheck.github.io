@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -365,6 +365,11 @@ function generateEventSchema() {
     };
     const addr = schema.location.address;
     Object.keys(addr).forEach(k => { if (k !== '@type' && !String(addr[k] || '').trim()) delete addr[k]; });
+    // online events are a VirtualLocation (the event URL); mixed events list both places
+    const mode = document.getElementById('event-mode').value;
+    const virtual = {"@type": "VirtualLocation", "url": document.getElementById('event-url').value || undefined};
+    if (mode === 'OnlineEventAttendanceMode') schema.location = virtual;
+    else if (mode === 'MixedEventAttendanceMode') schema.location = [schema.location, virtual];
     const org = document.getElementById('event-organizer').value.trim();
     if (org) schema.organizer = {"@type": "Organization", "name": org};
     const tUrl = document.getElementById('event-ticket-url').value.trim(), price = document.getElementById('event-price').value.trim();
@@ -386,6 +391,25 @@ function copyEventSchema() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool builds a schema.org Event object in JSON-LD from a form: name, description, start and end times, venue and address, event status, attendance mode, organizer, image, ticket link and price, and the event page URL. It wraps the result in a &lt;script type="application/ld+json"&gt; tag ready to paste. Top-level fields you leave empty are removed from the output, and so are blank address parts. It runs in your browser and does not contact any server.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Fill in Event Name and Description.</li>
+<li>Pick the Start Date and, if needed, the End Date.</li>
+<li>Enter the Location Name, Street Address, City, State or region, and the two-letter Country code.</li>
+<li>Choose the Event status and Attendance, then add the Organizer name and an Image URL.</li>
+<li>For paid events, add the Ticket URL and the price, with its currency code in the box below it.</li>
+<li>Add the Event URL, click Generate Schema, then Copy JSON-LD, and paste the block into the event page.</li>
+</ol>
+<h2>What to add by hand</h2>
+<p>Google's event documentation treats name, startDate and location as required. The form covers most of the recommended properties, but not performer or previousStartDate, and the address has no postal code, so add those yourself when they apply. The date picker produces times such as 2026-10-15T19:00 with no time zone. Google's examples end with a UTC offset such as -05:00.</p>
+<p>Whenever a ticket URL or price is present, the offer is marked InStock, and a price with no currency code is labeled USD. For Online, the location becomes a VirtualLocation; for Both, it lists the venue and a VirtualLocation together. The virtual location takes its URL from Event URL, so fill that in for an online or mixed event. The venue block is written for In person and Both even when its fields are blank, so fill it in or remove it. Nothing checks required fields, so an empty Start Date simply disappears from the markup. Then test it in Google's Rich Results Test.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/technical-seo/event-schema-markup/">Event Schema Markup: Getting Events Into Google's Rich Results</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

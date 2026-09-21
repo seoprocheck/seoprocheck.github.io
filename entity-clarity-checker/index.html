@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -317,6 +317,23 @@ function checkEntityClarity() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This checker runs five simple text tests on a draft to see whether it states plainly who or what it is about. You paste the content, name the primary entity (a company, product, person or topic), and it reports Pass or Improve for each test plus a score out of five with a percentage. The tests are pattern matches on the words you paste. There is no language model, no entity recognition and no knowledge graph lookup behind it, and nothing leaves your browser. Treat it as a quick editing checklist, not a measurement of how any search engine or AI system understands the page.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Paste the article or page copy into Paste your content. Plain text works best.</li>
+<li>Type the exact name you want recognized into Primary Entity.</li>
+<li>Click Analyze Entity Clarity and read the table: Check, Status and Details for each test.</li>
+<li>Edit the text in the box and rerun until every Improve row left is one you have chosen to accept.</li>
+</ol>
+<h2>What the five checks look for</h2>
+<p>Entity Mention Frequency passes when the name appears at least three times, counted case-insensitively as a plain substring, so it can match inside longer words and it ignores pronouns and nicknames. Early Entity Definition looks only at the first line that contains text, skipping any blank lines above it; if your paste starts with a title line, the title is what gets checked. Entity Definition Present wants the name directly followed by a phrase such as "is a", "is an", "refers to", "means" or "defined as"; a sentence like "Acme, founded in 1990, is a..." does not count. Supporting Statistics passes on a number with a percent sign, or a number followed by words like million, users, customers or years. Content Depth passes at 300 words or more.</p>
+<p>A pass does not mean the facts are right or sourced. The tool cannot tell.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/research/ai-search/entity-seo/">Entity SEO: Helping Search Engines and AI Understand Who You Are</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

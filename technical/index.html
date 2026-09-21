@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -68,6 +68,25 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="/redirect-chain-checker/" data-name="redirect chain checker trace redirect chains and spot wasteful hops."><h3>Redirect Chain Checker</h3><p>Trace redirect chains and spot wasteful hops.</p></a>
 <a class="card" href="/http-header-checker/" data-name="http header checker inspect a url&amp;#x27;s http response headers."><h3>HTTP Header Checker</h3><p>Inspect a URL&amp;#x27;s HTTP response headers.</p></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>Fix the plumbing search engines rely on</h2>
+<p>Visitors rarely see technical problems, but those problems decide which URLs search engines crawl, which version they index and which language they show. Six of these tools write code you paste into your site, and two read what your server already sends.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="/robots-txt-generator/">Robots.txt Generator</a>: set disallowed paths, add your sitemap and optionally block AI crawlers such as GPTBot and ClaudeBot.</li>
+<li><a href="/meta-robots-generator/">Meta Robots Tag Generator</a>: keep one page out of the index or out of snippets with noindex, nofollow or max-snippet.</li>
+<li><a href="/canonical-tag-generator/">Canonical Tag Generator</a>: point duplicate URLs to the version you want indexed.</li>
+<li><a href="/hreflang-generator/">Hreflang Tag Generator</a>: list every language or region version of a page plus an x-default, then paste the same set on every version.</li>
+<li><a href="/xml-sitemap-generator/">XML Sitemap Generator</a>: turn a list of URLs into a sitemap file you can download.</li>
+<li><a href="/htaccess-redirect-generator/">Htaccess Redirect Generator</a>: write 301 or 302 rules, or force HTTPS, www or trailing slashes on Apache.</li>
+<li><a href="/redirect-chain-checker/">Redirect Chain Checker</a>: trace every hop in pasted curl output and get one .htaccess rule that skips the chain.</li>
+<li><a href="/http-header-checker/">HTTP Header Checker</a>: grade X-Robots-Tag, caching, compression, HSTS, canonical and Vary headers.</li>
+</ul>
+<p>A page blocked in robots.txt cannot be crawled, so search engines never see a noindex tag on it. If you want a page out of the index, let it be crawled and use noindex. The sitemap generator leaves lastmod out by default, and any date you pick applies to every URL, so add one only when it is the real date those pages changed. For the two checkers, pasted curl output gives the full result and stays in your browser; the quick live check sends your URL to a public proxy and shows only part of the picture.</p>
+<p class="related">For how crawl rules and wildcards interact, read <a href="https://seoprocheck.com/indexing-crawl/robots-txt-complete-reference/">The Complete robots.txt Reference: Precedence, Wildcards, AI Bots &amp; Real-World Receipts</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -287,6 +287,23 @@ function updateSerpPreview() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool shows a mock Google result for the title, URL and meta description you type, and counts characters as you go. The preview redraws on every keystroke, so there is no button to press. It does not fetch your page: it only displays what you enter, which makes it handy for drafting new tags or comparing rewrites before anything goes live.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Type or paste your title into Page Title. The counter under it turns green between 50 and 60 characters and red above 60.</li>
+<li>Enter the page address in URL. It is shown exactly as you type it.</li>
+<li>Write your description in Meta Description. Its counter turns green from 150 to 160 characters and red past 160.</li>
+<li>Read the Preview box. Titles longer than 60 characters and descriptions longer than 160 are cut and end with three dots, so you can see where the message breaks.</li>
+</ol>
+<h2>How close to the real result is it?</h2>
+<p>Treat it as a drafting aid, not a pixel-perfect copy. The cut-off points here are fixed character counts, while Google shortens titles and snippets to fit the available width on each device, so a title full of wide capitals can be clipped earlier and one full of narrow letters can run longer. The layout is the classic blue title over a green URL; current results also show your site name, a favicon and a breadcrumb-style path, none of which appear here.</p>
+<p>Google also rewrites titles and snippets when it thinks other text describes the page better, and it often builds the snippet from page content that matches the query. Your best defense is a title that accurately names the page and a description that summarizes it in plain words. The 50 to 60 and 150 to 160 ranges are common rules of thumb, not limits Google publishes.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/on-page-seo/title-tags-meta-descriptions-guide/">Title Tags and Meta Descriptions: The Complete Guide</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

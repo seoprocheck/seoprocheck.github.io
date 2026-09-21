@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -293,6 +293,24 @@ function analyzeContent() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>Paste text into the box and the counter updates as you type: words, characters, sentences and paragraphs, plus an estimated reading time and speaking time. There is no button to press. The math is simple and fixed. Words are anything separated by spaces or line breaks. Characters include spaces and line breaks. Sentences are pieces of text ending in a period, question mark or exclamation point. Paragraphs are blocks separated by a blank line. Reading time assumes 200 words per minute and speaking time 150, both rounded up. Your text stays in your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Copy your draft as plain text and paste it into <strong>Paste your content</strong>.</li>
+<li>Read the four totals: <strong>Words</strong>, <strong>Characters</strong>, <strong>Sentences</strong> and <strong>Paragraphs</strong>.</li>
+<li>Check <strong>Reading Time</strong> and <strong>Speaking Time</strong> below them.</li>
+<li>Edit in place if you like; the numbers refresh on every keystroke.</li>
+</ol>
+<h2>Why your count may differ from your editor's</h2>
+<p>Abbreviations and decimals inflate the sentence count, because "e.g." or "3.5" gets split at every period, so treat that figure as rough. A hyphenated term like state-of-the-art counts as one word, and a slash with spaces around it counts as a word of its own. If you paste HTML source, tags and attributes are counted too, so paste the visible text only.</p>
+<p>Paragraphs are only split on blank lines. Some editors copy paragraphs with a single line break between them, which makes the whole piece count as one paragraph. Emoji and some symbols count as two characters, because that is how JavaScript measures string length.</p>
+<p>Word count is a planning number, not a quality score. Google's own guidance on helpful content says it does not have a preferred word count, so use the total to fit a brief or a format, not to chase a target.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/lexicon/glossary-content-seo/word-count/">Word Count</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

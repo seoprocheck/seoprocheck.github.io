@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -312,7 +312,7 @@ function generateHowtoSchema() {
         "estimatedCost": document.getElementById('howto-cost').value ? {"@type": "MonetaryAmount", "value": document.getElementById('howto-cost').value, "currency": ((document.getElementById('howto-currency') || {}).value || 'USD').trim().toUpperCase()} : undefined,
         "step": steps
     };
-    Object.keys(schema).forEach(k => schema[k] === undefined && delete schema[k]);
+    Object.keys(schema).forEach(k => (schema[k] === undefined || schema[k] === '') && delete schema[k]);
     const output = document.getElementById('howto-output');
     output.style.display = 'block';
     output.textContent = '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
@@ -325,6 +325,23 @@ function copyHowtoSchema() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator turns written steps into HowTo structured data in JSON-LD. You give it a title, a short description, an optional total time and cost, and as many steps as you need. It builds a schema.org HowTo object with a numbered HowToStep for each filled-in step and wraps it in a &lt;script type="application/ld+json"&gt; block ready to paste. Nothing you type leaves your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Put the guide's name in "Title (How to...)" and a one or two sentence summary in "Description".</li>
+<li>Optionally fill in "Total Time" as an ISO 8601 duration (PT30M means 30 minutes, PT1H15M means one hour 15 minutes) and a plain number in "Estimated Cost", with its three-letter code in "Currency".</li>
+<li>Give Step 1 a short name and write its instructions below. Click "+ Add Step" for each step after that.</li>
+<li>Click "Generate Schema", read through the output, then click "Copy JSON-LD" to copy the whole block, script tags included.</li>
+</ol>
+<h2>Before you paste it into your site</h2>
+<p>The tool does not validate your input, so check the output yourself. Blank title or description boxes are left out of the markup without any warning, so fill in both. Total Time is copied exactly as typed, so "30 minutes" gives an invalid value. Currency defaults to USD and is not checked against the list of real codes, and the cost itself should be digits only, without symbols. A step with both boxes blank is skipped, and the filled steps are numbered 1, 2, 3 in order, so an empty box costs nothing. There is no delete button; just leave spare boxes empty.</p>
+<p>Google stopped showing HowTo rich results in 2023, so this markup will not bring back a step-by-step display in Google results. The schema.org type is still valid for any parser that reads it, and the usual structured data rule holds: mark up only steps that readers can see on the page, and run the finished page through a validator before you publish.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/technical-seo/howto-schema-deprecation/">HowTo Schema Is Gone: What to Do With Your How-To Markup Now</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

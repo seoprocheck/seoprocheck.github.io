@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -308,6 +308,24 @@ function copyTwitterCard() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator writes the twitter: meta tags that control how a link looks when it is shared on X (formerly Twitter). Choose a card type, fill in a title, description, image URL, image alt text and optionally an @username, and it outputs twitter:card plus a tag for each field you filled: twitter:title, twitter:description, twitter:image, twitter:image:alt and twitter:site. Blank fields produce no tag. Values are escaped for HTML attributes. It runs in your browser, shows no preview, and does not enforce the length hints shown in the fields.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Pick Card Type: Summary with Large Image for a wide image above the text, or Summary for a small square thumbnail.</li>
+<li>Enter the Title and Description. The field hints say 70 and 200 characters, which match the limits in X's card documentation.</li>
+<li>Paste an absolute Image URL, then describe the picture in Image alt text.</li>
+<li>Add your Twitter @username if you want the site's account named in the card.</li>
+<li>Click Generate Tags, then Copy, and paste the block into the page's &lt;head&gt;.</li>
+</ol>
+<h2>Check these before you publish</h2>
+<p>The alt tag is only written when both Image URL and Image alt text are filled, so an image without alt text ships with no description for screen reader users. Leaving Title or Description blank drops that tag entirely, which is fine only if the page already has Open Graph equivalents. The tool does not add the @ for you, so type it.</p>
+<p>If your pages already carry Open Graph tags, X falls back to og:title, og:description and og:image when the matching twitter: tags are missing, so you may only need twitter:card. For the large image card, X's documentation describes a 2:1 image and lists file size and format limits. To check the result, paste the URL into a draft post and look at the preview. X caches cards, so changes can take time to appear.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/on-page-seo/title-tags-meta-descriptions-guide/">Title Tags and Meta Descriptions: The Complete Guide</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

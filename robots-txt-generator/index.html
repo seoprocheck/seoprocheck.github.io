@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -308,6 +308,23 @@ function downloadRobotsTxt() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator writes a starter robots.txt file. It opens with a group for all crawlers (User-agent: *) containing the paths you want kept out of the crawl, adds a separate "Disallow: /" group for each AI crawler you tick, and ends with a Sitemap line. You can copy the result or download it as robots.txt. The file is built in your browser; the tool does not read or test your live robots.txt.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Paste the full address of your XML sitemap into Sitemap URL.</li>
+<li>Under "Block these crawlers", tick any of GPTBot, ClaudeBot, PerplexityBot, CCBot or Google-Extended that you want to keep out. The ClaudeBot box writes a group for ClaudeBot only, since anthropic-ai and Claude-Web are retired names.</li>
+<li>List folders or pages to keep all crawlers away from in Additional Disallow Paths, one per line, each starting with a slash. Leave it empty and the file allows everything.</li>
+<li>Click "Generate robots.txt", then Copy or Download and upload the file to the root of your host.</li>
+</ol>
+<h2>What the rules actually do</h2>
+<p>Disallow stops compliant crawlers from fetching a URL. It does not remove the URL from search results, and a blocked page can still be indexed from links pointing to it, so use noindex or authentication for pages that must stay out. The tool also passes your paths through unchecked: a path without a leading slash, or a typo, goes into the file as typed.</p>
+<p>The AI checkboxes cover a short list. Many vendors run separate agents for search features and user-requested fetches (OpenAI's OAI-SearchBot and ChatGPT-User, for example), and blocking a training crawler does not block those. Google-Extended controls whether Google may use your content for Gemini models; it does not affect Googlebot or Google Search. Check each vendor's documentation for the current names before relying on the list.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/indexing-crawl/robots-txt-complete-reference/">The Complete robots.txt Reference: Precedence, Wildcards, AI Bots &amp; Real-World Receipts</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

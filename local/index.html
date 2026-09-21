@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -63,6 +63,21 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="/nap-consistency-checker/" data-name="nap consistency checker check name/address/phone consistency for local seo."><h3>NAP Consistency Checker</h3><p>Check Name/Address/Phone consistency for local SEO.</p></a>
 <a class="card" href="/local-business-schema-generator/" data-name="local business schema generator build localbusiness schema with nap, hours and geo data."><h3>Local Business Schema Generator</h3><p>Build LocalBusiness schema with NAP, hours and geo data.</p></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>Local SEO basics you can check yourself</h2>
+<p>If your business has a storefront or serves a local area, three jobs come up again and again. Your name, address and phone number need to match everywhere they appear. Your site should describe the business in structured data. And customers need an easy way to leave a review. Each tool on this page handles one of those jobs, and all of them run in your browser.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="/nap-consistency-checker/">NAP Consistency Checker</a>: compare your official name, address and phone number with a listing you copy from a directory, map or social profile.</li>
+<li><a href="/local-business-schema-generator/">Local Business Schema Generator</a>: build LocalBusiness JSON-LD with your business type, address, country, phone, website, price range, logo, opening hours and optional latitude and longitude.</li>
+<li><a href="/google-review-link-generator/">Google Review Link Generator</a>: turn your Google Place ID into a direct link that opens the review form, ready for emails, your website or a QR code.</li>
+<li><a href="/schema-markup-generator/">Schema Markup Generator</a>: a shorter Local Business form, plus Organization and Person markup.</li>
+</ul>
+<p>The NAP checker ignores case, accents and punctuation and compares only the digits of a phone number, so a mismatch it reports is a real difference, such as St versus Street or a missing suite number. Fix that listing to match your official version, then check the next one. In the Local Business Schema Generator, the Country field starts as US, so change it if your business is elsewhere. Write opening hours with short day codes and separate them with commas, such as Mo-Fr 09:00-17:00, Sa 10:00-14:00.</p>
+<p class="related">For a guide to the properties you can add to your markup, read <a href="https://seoprocheck.com/schema-guides/localbusiness-schema/">LocalBusiness Schema: A Complete Property Guide</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

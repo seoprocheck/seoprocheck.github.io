@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -291,6 +291,24 @@ function copyReviewLink() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool turns a Google Place ID into a link that opens the review form for that business. It puts your ID at the end of https://search.google.com/local/writereview?placeid= and shows the result in a read-only box you can copy. It does not look up your business, check that the ID exists, or make a QR code; it only assembles the link, in your browser. Apart from trimming spaces at either end, the ID is used exactly as typed.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Open Google's Place ID Finder from the link under the field, search for your business name, and copy the ID it shows. Business IDs usually start with ChIJ.</li>
+<li>Paste the ID into the Google Place ID field.</li>
+<li>Click Generate Link. Your Google Review Link appears below, with a short list of places to use it.</li>
+<li>Click Copy Link.</li>
+<li>Open the link in a private browser window to make sure it lands on your business before you share it.</li>
+</ol>
+<h2>Where the link works best</h2>
+<p>A direct link removes a couple of searches and clicks for a customer who is willing to leave a review. The tips on the page suggest an email signature, follow-up emails, a QR code at the counter, and your site footer. People need to be signed in to a Google account to post, so the link will ask them to sign in if they are not.</p>
+<p>Stay within Google's rules when you ask. Its policies for user contributed content do not allow offering incentives for reviews or asking only the customers you expect to be happy, a practice often called review gating. Send the same link to everyone. Place IDs can change over time, so recheck the link once in a while.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/articles/local-seo-glossary/how-to-get-more-google-reviews/">How to Get More Google Reviews</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

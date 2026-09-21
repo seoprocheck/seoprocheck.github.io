@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -412,6 +412,22 @@ async function fetchAndCheck(){
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This checker reads a robots.txt file and tells you, for 27 AI user agents, whether the file allows or blocks them at the root of your site. Bots are grouped by purpose: model training, AI search and citations, and assistants that fetch a page live when a user asks. Each row shows the owner and a verdict. The rules are evaluated the way the robots.txt standard describes: a group that names the bot beats the * group, the longest matching path wins, Allow wins a tie, and * and $ wildcards are supported.</p>
+<h2>How to use it</h2>
+<ol>
+<li>To check a live site, type a domain or URL in "Domain or URL" and click "Fetch robots.txt &amp; Check". The tool requests /robots.txt on that host through a public CORS proxy, copies the file into the text box and shows the report.</li>
+<li>If the fetch fails, open the robots.txt link the tool gives you, copy the file, and paste it into "Or paste robots.txt content".</li>
+<li>To test a draft, paste it into the same box and click "Check Pasted robots.txt". That path never leaves your browser.</li>
+</ol>
+<h2>Reading the verdicts</h2>
+<p>A "not named" tag means the file never mentions that bot, so its verdict comes from the * group, or it is allowed by default. The summary counts how many bots are blocked and how many your file names directly, and warns when you block some AI bots but leave others unnamed.</p>
+<p>The tool tests the path "/" only, so a bot marked Allowed may still be shut out of a folder like /blog/. If one bot is named in several groups, their rules are merged before the check, as RFC 9309 requires. Some tokens, such as Google-Extended and Applebot-Extended, are control names you set in robots.txt rather than separate crawlers. And robots.txt is a request: this check cannot see firewall or CDN blocks, and it cannot tell you whether a bot obeys the file.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/research/ai-search/ai-crawler-map/">The AI Crawler Map: Every Bot Reading Your Site in 2026</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · The paste path runs entirely in your browser; the optional live check sends the URL you type to a public proxy · No sign-up
 </div></footer>

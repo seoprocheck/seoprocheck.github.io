@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -65,6 +65,22 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="/entity-clarity-checker/" data-name="entity clarity checker check how clearly your content defines its core entities."><h3>Entity Clarity Checker</h3><p>Check how clearly your content defines its core entities.</p></a>
 <a class="card" href="/ai-content-readiness/" data-name="ai content readiness checker ai content readiness checker — a free seo procheck tool."><h3>AI Content Readiness Checker</h3><p>AI Content Readiness Checker — a free SEO ProCheck tool.</p></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>Check how AI search sees your site</h2>
+<p>Getting cited by AI search starts with two basics: letting the right crawlers in, and writing pages that say clearly what they are about. The tools on this page cover both. Some look at access, through your robots.txt and llms.txt files. Others look at clarity, by checking whether your text names its subject early, defines it and backs it up.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="/ai-crawler-checker/">AI Crawler Checker</a>: see which of 27 AI crawlers, such as GPTBot, ClaudeBot and PerplexityBot, your robots.txt allows or blocks, and which ones it never names.</li>
+<li><a href="/llms-txt-generator/">LLMs.txt Generator</a>: draft an llms.txt file from your site name, a short description, your key topics and your most important pages.</li>
+<li><a href="/entity-clarity-checker/">Entity Clarity Checker</a>: paste a page and name its main subject to check that you mention it early, define it in a plain sentence and support it with numbers.</li>
+<li><a href="/ai-content-readiness/">AI Content Readiness Checker</a>: paste the HTML or text of a page to check for structured data, headings, lists, sources and definitions.</li>
+<li><a href="/citation-formatter/">Citation Formatter</a>: turn a source and its key finding into an inline citation, a reference line and an HTML snippet.</li>
+</ul>
+<p>An Allowed result means your robots.txt permits that bot. A firewall or CDN rule can still turn it away, so confirm real visits in your server logs. The two content checkers score simple patterns, such as definition phrases, numbers and word counts, so read their scores as a list of things to review, not as a grade. Pasting robots.txt into the AI Crawler Checker keeps everything in your browser; the optional live fetch sends the domain you type to a public proxy.</p>
+<p class="related">To check whether a firewall is blocking crawlers your robots.txt allows, read <a href="https://seoprocheck.com/research/ai-search/is-your-waf-blocking-gptbot/">Is Your Cloudflare or WAF Secretly Blocking GPTBot?</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

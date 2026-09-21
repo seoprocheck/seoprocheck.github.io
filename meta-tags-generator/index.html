@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -327,6 +327,24 @@ function copyMetaTags() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator writes the basic head tags for a page from a short form. It always outputs a UTF-8 charset tag, a responsive viewport tag and a robots tag. The &lt;title&gt;, meta description, keywords, author and canonical tags appear only when you fill those fields. Your text is escaped, so quotes, ampersands and angle brackets will not break the markup, and none of it is sent to a server.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Type the "Page Title" and "Meta Description" for the page.</li>
+<li>Optionally add "Keywords (comma-separated)", "Author" and a "Canonical URL". Use the full absolute URL, including https://.</li>
+<li>Pick a "Robots" value: "index, follow", "noindex, follow" or "noindex, nofollow".</li>
+<li>Pick a "Language". The tool does not make a tag for it; it adds a comment reminding you to set lang on the &lt;html&gt; element.</li>
+<li>Click "Generate All Meta Tags", then "Copy".</li>
+</ol>
+<h2>Before you paste it into your site</h2>
+<p>Most CMS themes already print a charset, a viewport and often a robots tag. Paste only the lines your page is missing, because duplicates can conflict. Left on "index, follow", the robots line only restates the default behavior, so you can drop it; if your CMS already prints a robots tag, keep only one of the two, or you risk mixed signals. The keywords tag is harmless, but Google has said for years that it does not use it, so do not spend time on it.</p>
+<p>The form does not count characters, so length is on you. Google does not publish a fixed limit for titles or descriptions, but long ones are cut off in results, so put the words that matter first and keep each one specific to the page. Google may also rewrite either one when it thinks another text fits a query better. The tool also skips social tags such as Open Graph, so add those separately if you want control over link previews.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/seo-checks/meta-tags/multiple-title-tags/">Multiple Title Tags: How to Fix Duplicate Titles</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

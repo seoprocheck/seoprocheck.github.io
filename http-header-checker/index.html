@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -354,6 +354,23 @@ async function quickLiveCheck(){
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool grades the HTTP response headers that matter most for SEO and basic security. You paste the output of curl -I, and it reads the status line and eight headers: X-Robots-Tag, Content-Type, Cache-Control, Content-Encoding, Strict-Transport-Security, X-Content-Type-Options, Link and Vary. Each gets a pass, a warning or a blocking flag with a one-line reason, and any other headers are listed underneath. Pasted headers are graded on your own machine; nothing is uploaded.</p>
+<h2>How to use it</h2>
+<ol>
+<li>In a terminal, run curl -I followed by your URL and copy everything it prints.</li>
+<li>Paste it into "Or paste headers" and click "Analyze Headers".</li>
+<li>Read the status line, the table and the result line, which counts blocking issues and warnings.</li>
+<li>The "Quick Live Check" button, next to the "URL" field, only confirms that a page loads through a public CORS proxy. A browser cannot read another site's response headers, so that check shows the proxy's status code, not your server's, and it sends the URL you type to the proxy.</li>
+</ol>
+<h2>What the grades mean</h2>
+<p>The only blocking flag is an X-Robots-Tag containing noindex or none, because that keeps the URL out of search indexes whatever the HTML says. The status line gets a check mark for 2xx, a warning for 3xx and a cross for 4xx or 5xx; the totals count header issues only. Warnings cover a missing Content-Type or one without a charset, a missing or no-store/no-cache Cache-Control, no Content-Encoding (curl -I may hide compression; add --compressed), no HSTS header, no X-Content-Type-Options, and a Vary header that includes User-Agent. A canonical sent in a Link header is shown so you can confirm it.</p>
+<p>Paste one response at a time. If you paste a redirect chain from curl -IL, the tool reads the last status line and, when a header repeats, keeps the last value, so earlier hops blur together. A warning is a prompt to confirm the setting was deliberate, not proof of a problem.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/evergreen/technical-seo-glossary/crawlability-and-indexation/http-header-optimization-for-seo/">HTTP Header Optimization for SEO</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · The paste path runs entirely in your browser; the optional live check sends the URL you type to a public proxy · No sign-up
 </div></footer>

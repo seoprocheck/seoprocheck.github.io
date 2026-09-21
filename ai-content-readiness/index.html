@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -299,6 +299,22 @@ function checkAIReadiness() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This checker scans a block of page content for eight features that people often associate with AI-friendly pages: structured data, headings, question and answer content, lists, numbers, cited sources, plain definitions and length. Each check is a simple pattern match. It reports a pass or fail per check, groups them under five headings, and turns the share of passes into a percentage score and a letter grade (A at 80 or more, B at 60, C at 40, D below). It does not fetch anything; the analysis reads only what you paste.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Open your page, view its source or copy its text, and paste it into "Page Content (paste HTML or text)".</li>
+<li>Click "Analyze AI Readiness".</li>
+<li>Read the table. A failed row shows a short tip; a passed row says "Good".</li>
+</ol>
+<h2>What a pass actually means</h2>
+<p>A pass only means a pattern was found somewhere in the text. The schema check looks for the strings "application/ld+json" or "itemtype=", so it can pass only when you paste HTML. The heading check passes on any heading tag or Markdown heading, without checking order. The FAQ check passes on FAQPage schema, the word FAQ, the phrase "frequently asked", a line starting with "Q:", or an h2 to h4, dt or summary element whose text ends in a question mark. Statistics pass on any percentage or a number followed by words like million or users. Sources pass on "according to", "study", "research" or "report". Definitions pass on phrases like "is a" or "refers to". Word count strips tags and passes at 500 words, but inline script and style code counts toward it.</p>
+<p>Use it as a quick checklist, not a verdict. Paste the visible text for a fair word count, and the HTML source when you want the schema check to mean something. None of these checks can tell you whether AI systems will cite the page.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/research/ai-search/content-structure-for-ai/">Structuring Content So AI Can Actually Extract It</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

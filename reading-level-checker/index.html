@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -299,6 +299,23 @@ function countSyllables(word) {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>Paste a block of English text and this checker calculates two classic readability scores: the Flesch-Kincaid Grade Level and the Flesch Reading Ease score. Both are based on only two things, the average number of words per sentence and the average number of syllables per word. Alongside the scores you get the word count, sentence count and both averages, so you can see which of the two is pulling the result. Your text stays in your browser.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Copy the body text of your page (plain text, not HTML) and paste it into "Paste your content".</li>
+<li>Click "Analyze Reading Level".</li>
+<li>Read the two score boxes. The grade is rounded to a whole number and never goes below 1. The Reading Ease number runs higher for easier text, and the tool labels it Very Easy (80 and up), Easy (60 to 79), Average (40 to 59), Difficult (20 to 39) or Very Difficult.</li>
+<li>Check the table. A high Avg Words/Sentence means your sentences are long; a high Avg Syllables/Word points to long or technical words.</li>
+</ol>
+<h2>Why your score might be off</h2>
+<p>The counting is simple, so the input matters. Sentences are split at every period, question mark and exclamation point, so abbreviations such as "e.g.", decimals and URLs create extra, very short "sentences" and make text look easier than it is. Headings and list items without end punctuation do the opposite: they merge into the next sentence and inflate its length. Syllables are estimated from vowel groups, which works reasonably for common English words but misses some, and the method is meaningless for other languages.</p>
+<p>Use the result to spot passages worth simplifying, not as a pass or fail grade. The panel suggests Grade 7 to 9 for general web content, a sensible target for a broad audience, but specialist readers can handle more. These formulas measure your text, not your search performance.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/lexicon/glossary-content-seo/readability/">Readability</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

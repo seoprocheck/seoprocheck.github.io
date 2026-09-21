@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -76,6 +76,24 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="https://github.com/seoprocheck/llms-txt-kit" target="_blank" rel="noopener" data-name="llms.txt kit validate and generate llms.txt, the markdown map that tells ai models what your site is."><h3>llms.txt Kit</h3><p>Validate and generate llms.txt, the Markdown map that tells AI models what your site is.</p><span class="tag">CLI</span></a>
 <a class="card" href="https://github.com/seoprocheck/ai-crawler-audit" target="_blank" rel="noopener" data-name="ai crawler audit audit robots.txt for ai crawler policy — which of 27 ai bots you actually allow."><h3>AI Crawler Audit</h3><p>Audit robots.txt for AI crawler policy — which of 27 AI bots you actually allow.</p><span class="tag">CLI</span></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>When a command line tool beats a browser tool</h2>
+<p>A browser tool works on one page or one paste at a time. These 15 Python scripts take on jobs that need more reach: checking every URL in a sitemap, reading your server logs, working through a Search Console export, or comparing your page with the pages that outrank you. Each one is a single file with no dependencies and no API keys. Clone it and run it with Python 3.8 or newer. Every script has a <code>--selftest</code> flag and a bundled sample file, so you can watch it work before you point it at your own site.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="https://github.com/seoprocheck/bulk-schema-validator">Bulk Schema Validator</a>: check the JSON-LD on every URL in a sitemap against 17 rich result types, in CI if you want.</li>
+<li><a href="https://github.com/seoprocheck/log-crawl-analyzer">Log Crawl Analyzer</a>: read your server logs to see how each bot, AI crawlers included, spends its crawl budget.</li>
+<li><a href="https://github.com/seoprocheck/redirect-chain-fixer">Redirect Chain Fixer</a>: find redirect chains and loops, then get the rules that collapse them.</li>
+<li><a href="https://github.com/seoprocheck/content-decay">Content Decay</a> and <a href="https://github.com/seoprocheck/cannibalization-map">Cannibalization Map</a>: work through Search Console exports to find pages losing traffic and URLs competing for the same query.</li>
+<li><a href="https://github.com/seoprocheck/schema-gap">Schema Gap</a> and <a href="https://github.com/seoprocheck/content-brief-builder">Content Brief Builder</a>: compare your page with the pages that rank, for schema types and for topic coverage.</li>
+<li><a href="https://github.com/seoprocheck/hreflang-check">Hreflang Check</a>: catch missing return tags across a set of language versions.</li>
+<li><a href="https://github.com/seoprocheck/ai-crawler-audit">AI Crawler Audit</a>: the AI Crawler Checker's robots.txt check, for scripts and repeat runs.</li>
+</ul>
+<p>Run <code>--selftest</code> first, then try a small slice, such as a single day of logs, and read the report before you run the whole site. Thin Content Enrich and Content Decay suggest what to add rather than what to delete, so use them to plan updates.</p>
+<p class="related">If server logs are new to you, start with <a href="https://seoprocheck.com/indexing-crawl/log-file-analysis-seo-guide/">Log File Analysis for SEO: The Complete Guide</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

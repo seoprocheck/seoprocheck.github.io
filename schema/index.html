@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -66,6 +66,23 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="/video-schema-generator/" data-name="video schema generator produce videoobject schema so your videos qualify for rich results."><h3>Video Schema Generator</h3><p>Produce VideoObject schema so your videos qualify for rich results.</p></a>
 <a class="card" href="/event-schema-generator/" data-name="event schema generator generate event schema with dates, venue and ticket info."><h3>Event Schema Generator</h3><p>Generate Event schema with dates, venue and ticket info.</p></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>What these schema generators do</h2>
+<p>Structured data tells search engines what a page is: an article, a product, an event, a video. Each generator on this page turns a short form into JSON-LD, the format Google recommends, wrapped in a script tag you can paste into your page. You fill in the fields, click Generate Schema and copy the result. Nothing you type leaves your browser.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="/schema-markup-generator/">Schema Markup Generator</a>: the general option for Article, Product, Local Business, Organization, Person and WebPage markup.</li>
+<li><a href="/faq-schema-generator/">FAQ Schema Generator</a>: a page with a real list of questions and answers that visitors can read.</li>
+<li><a href="/howto-schema-generator/">HowTo Schema Generator</a>: step-by-step instructions, with an optional total time and cost.</li>
+<li><a href="/breadcrumb-schema-generator/">Breadcrumb Schema Generator</a>: the path from your home page to the current page, one level at a time.</li>
+<li><a href="/video-schema-generator/">Video Schema Generator</a>: a page built around a video, with its thumbnail, upload date and duration.</li>
+<li><a href="/event-schema-generator/">Event Schema Generator</a>: concerts, classes and conferences with dates, a venue, status, in-person or online attendance, organizer and ticket offers.</li>
+</ul>
+<p>Before you publish, run the output through Google's Rich Results Test and make sure every value matches what visitors can see on the page. The Schema Markup Generator leaves out any field you leave blank, including the Article publisher, so fill in every value you have. Durations use the ISO 8601 format shown in the fields, such as PT30M for 30 minutes. A page can carry more than one block, so for an article with breadcrumbs, generate both and paste them side by side. If a hand edit breaks the output, paste the JSON between the script tags into the <a href="/json-validator/">JSON Validator &amp; Formatter</a> to find the problem.</p>
+<p class="related">If your markup validates but no rich result appears, read <a href="https://seoprocheck.com/technical-seo/validate-debug-structured-data-rich-results/">How to Validate and Debug Structured Data When Rich Results Fail to Show</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

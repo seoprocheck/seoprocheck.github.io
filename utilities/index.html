@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -69,6 +69,24 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 <a class="card" href="/html-entity-converter/" data-name="html entity converter convert characters to/from html entities."><h3>HTML Entity Converter</h3><p>Convert characters to/from HTML entities.</p></a>
 <a class="card" href="/regex-tester/" data-name="regex tester test regular expressions against sample text live."><h3>Regex Tester</h3><p>Test regular expressions against sample text live.</p></a>
 </div></div>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>Small tools for everyday SEO and web work</h2>
+<p>These nine utilities handle the quick conversions and checks that come up while you edit pages, set up tracking or read data: encoding a URL, formatting JSON, testing a pattern, turning a title into a slug. They run in your browser, so you can paste client data or unreleased URLs without sending them anywhere.</p>
+<h2>Which tool for which job</h2>
+<ul>
+<li><a href="/json-validator/">JSON Validator &amp; Formatter</a>: check that JSON parses, then format or minify it. To check JSON-LD, paste it without its script tags.</li>
+<li><a href="/regex-tester/">Regex Tester</a>: try a pattern with the g, i and m flags and see every match highlighted.</li>
+<li><a href="/utm-builder/">UTM Parameter Builder</a>: add source, medium, campaign, term and content tags to a link for your analytics.</li>
+<li><a href="/slug-generator/">URL Slug Generator</a>: turn a title into a lowercase, hyphenated slug.</li>
+<li><a href="/url-encoder-decoder/">URL Encoder/Decoder</a>: read or build links and query strings that contain spaces or symbols.</li>
+<li><a href="/timestamp-converter/">Timestamp Converter</a>: switch between Unix timestamps and dates, with ISO 8601, UTC and local time shown.</li>
+<li><a href="/html-entity-converter/">HTML Entity Converter</a>, <a href="/base64-encoder-decoder/">Base64 Encoder/Decoder</a> and <a href="/lorem-ipsum-generator/">Lorem Ipsum Generator</a>: escape special characters, decode Base64 strings and fill mockups with placeholder text.</li>
+</ul>
+<p>The Regex Tester uses your browser's JavaScript engine. Google Search Console filters use RE2 syntax, which has no lookaheads or backreferences, so a pattern that works here may fail there. The slug generator turns accented letters into plain ones and underscores into hyphens, so caf&eacute; becomes cafe, but it drops other symbols, so check that names such as Q&amp;A still read well. In UTM tags, keep values lowercase and consistent, since Google Analytics treats Email and email as separate values.</p>
+<p class="related">For patterns you can use on your own query data, read <a href="https://seoprocheck.com/analytics-seo/regex-google-search-console/">Using Regex in Google Search Console to Find Hidden Query Opportunities</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

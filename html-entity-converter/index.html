@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -288,6 +288,23 @@ function copyEntities() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This converter escapes text so it can sit safely inside HTML, and turns HTML entities back into readable characters. Decoding uses your browser's own parser, so it recognizes every entity a browser does, and nothing leaves the page. A small reference table under the tool lists the entities you meet most often: &amp;amp;, &amp;lt;, &amp;gt;, &amp;quot;, &amp;apos; and &amp;nbsp;.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Paste your text into the Input box.</li>
+<li>Click "Encode →" to escape it, or "← Decode" to turn entities back into characters.</li>
+<li>Read the result in the Output box, which cannot be edited directly.</li>
+<li>Click Copy to put the output on your clipboard.</li>
+</ol>
+<h2>What each direction really does</h2>
+<p>Encode escapes the five characters that can break markup: the ampersand, the less-than and greater-than signs, double quotes (as &amp;quot;) and apostrophes (as the numeric &amp;#39;). That makes the output safe both in element text and inside quoted attribute values. It leaves accented letters, symbols such as &copy;, emoji and non-breaking spaces untouched, which is fine on a UTF-8 page.</p>
+<p>Decode treats the input as plain text: it understands named and numeric entities alike (&amp;eacute;, &amp;#8217; and so on), while any tags stay exactly as typed and nothing in the input can run. A decoded &amp;nbsp; becomes a non-breaking space, not a regular one. Two more traps: encoding text that is already encoded turns &amp;amp; into &amp;amp;amp;, which then shows on screen as &amp;amp; rather than &amp;, and the HTML parser does not decode entities inside a script element, so write plain characters in JSON-LD.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/seo-checks/indexation/missing-charset-declaration/">Missing Charset Declaration: How to Fix It</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -286,6 +286,22 @@ function copySlug() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This generator turns a title or phrase into a URL slug as you type. It folds accented letters to plain ones, lowercases the text, turns underscores and spaces into hyphens, removes every other character that is not a letter or digit, collapses repeated hyphens and trims them from both ends. "10 Tips for Faster WordPress Sites!" becomes 10-tips-for-faster-wordpress-sites, and the conversion happens locally on your device.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Type or paste your page title into "Text to Convert".</li>
+<li>Watch "Generated Slug" update with each keystroke.</li>
+<li>Edit the source text until the slug reads well, then click "Copy Slug".</li>
+</ol>
+<h2>What the cleanup does not do</h2>
+<p>Accents aside, the tool strips characters rather than converting them. "Café Menu" gives cafe-menu, but apostrophes vanish ("Don't" becomes dont) and an ampersand disappears without becoming "and". Letters with no plain form, such as ß, are dropped, and text in non-Latin scripts, such as Japanese or Greek, disappears entirely and can leave you with an empty slug. Underscores become hyphens, the separator Google's URL guidance recommends so words read as separate. Always read the result before you use it.</p>
+<p>It also does not shorten anything or remove stop words. The tips box on the page suggests short slugs of three to five words without filler like "a" or "the", but you apply that yourself by trimming the source text. Keep the words that describe the page, drop the rest. Finally, if the page is already live, changing its slug changes its URL: set up a 301 redirect from the old address so links and bookmarks still work.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/faq/technical-seo-faq/url-structure-faq/">URL Structure FAQ: Best Practices for SEO-Friendly URLs</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>

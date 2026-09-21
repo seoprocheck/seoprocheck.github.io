@@ -43,7 +43,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 @media(prefers-color-scheme:dark){
 :root{--ink:#e8eaf2;--muted:#9aa3b5;--bg:#12141c;--card:#1b1e29;--line:#2a2e3d}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <script type="application/ld+json" id="spc-entity">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://seoprocheck.com/#organization","name":"SEO ProCheck","url":"https://seoprocheck.com/","description":"Technical SEO and AI-search practice publishing research, guides and free tools.","sameAs":["https://seoprocheck.github.io/","https://github.com/seoprocheck","https://www.linkedin.com/in/tech-seo"]},{"@type":"WebSite","@id":"https://seoprocheck.github.io/#website","url":"https://seoprocheck.github.io/","name":"SEO ProCheck Tools","description":"The free tool collection published by SEO ProCheck (seoprocheck.com).","publisher":{"@id":"https://seoprocheck.com/#organization"},"isPartOf":{"@id":"https://seoprocheck.com/#website"}}]}</script>
 </head>
 <body>
@@ -160,6 +160,16 @@ function filterTools(q){
   document.getElementById('count').textContent = q ? n+' tool'+(n===1?'':'s')+' match' : '';
 }
 </script>
+<!-- spc-prose -->
+<div class="wrap catprose">
+<h2>Free SEO and GEO tools from SEO ProCheck</h2>
+<p>This site collects 41 browser tools and 15 command line tools for technical SEO, structured data, content and AI search visibility. It is published by <a href="https://seoprocheck.com/">SEO ProCheck</a>, where the research and guides behind the tools are written. Every tool is free, and none of them asks you to sign up.</p>
+<h2>How the tools are organized</h2>
+<p>The browser tools sit in seven groups. <a href="/schema/">Schema &amp; Structured Data</a> writes JSON-LD for articles, products, FAQs, events and more. <a href="/geo-ai/">GEO &amp; AI Visibility</a> checks which AI crawlers can reach you and how clearly your content defines its subject. <a href="/technical/">Technical SEO</a> covers robots.txt, canonicals, hreflang, sitemaps, redirects and headers. <a href="/content/">Content Analysis</a> measures length, headings, readability and keyword use. <a href="/local/">Local SEO</a> handles name, address and phone checks, local business schema and review links. <a href="/social-meta/">Social &amp; Meta</a> writes Open Graph, X card and meta tags. <a href="/utilities/">Developer Utilities</a> holds encoders, a JSON validator, a regex tester and a UTM builder. The <a href="/command-line/">Command Line</a> group lists the 15 Python scripts for jobs a browser cannot do, such as whole-site crawls and log analysis.</p>
+<p>The browser tools run in your browser, so the text, code and URLs you paste are not uploaded. Three tools also offer an optional live check: the <a href="/ai-crawler-checker/">AI Crawler Checker</a>, the <a href="/redirect-chain-checker/">Redirect Chain Checker</a> and the <a href="/http-header-checker/">HTTP Header Checker</a>. That live check sends the URL you type to a public proxy. If you would rather keep it private, paste the robots.txt file or the curl output instead, and nothing leaves your browser.</p>
+<p class="related">To put these tools to work in a full site review, read <a href="https://seoprocheck.com/evergreen/technical-seo-glossary/technical-seo-audit-checklist-complete-framework/">Technical SEO Audit Checklist: Complete Framework</a>.</p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) &middot; Browser tools run entirely on your machine &middot; No sign-up
 </div></footer>

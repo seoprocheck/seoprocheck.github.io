@@ -42,7 +42,7 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:26px 0;colo
 .spc-tool-wrapper input,.spc-tool-wrapper textarea,.spc-tool-wrapper select{background:#0f111a !important;color:#e8eaf2 !important;border-color:#2a2e3d !important}
 .spc-tool-wrapper .spc-output{background:#0f111a !important;color:#d7f5e0 !important;border-color:#2a2e3d !important}
 }
-</style>
+/* spc-prose css */.toolprose,.catprose{padding:6px 20px 24px}.toolprose h2,.catprose h2{font-size:1.25rem;margin:30px 0 8px;color:var(--ink)}.toolprose p,.toolprose li,.catprose p,.catprose li{line-height:1.7}.toolprose ol,.catprose ul{padding-left:22px}.toolprose .related,.catprose .related{color:var(--muted);margin-top:18px}</style>
 <style>.spc-tool-wrapper {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     max-width: 900px;
@@ -331,6 +331,23 @@ function downloadSitemap() {
 }
 </script>
 </div>
+<!-- spc-prose -->
+<div class="wrap toolprose">
+<h2>What it does</h2>
+<p>This tool turns a plain list of URLs into a sitemap file that follows the sitemaps.org 0.9 protocol. Each address gets a &lt;url&gt; entry with &lt;loc&gt;, &lt;changefreq&gt; and &lt;priority&gt;, plus &lt;lastmod&gt; if you ask for it, and characters such as &amp; are escaped so the XML stays valid. It works entirely from the list you paste: it does not crawl your site or check the URLs.</p>
+<h2>How to use it</h2>
+<ol>
+<li>Paste your pages into "URLs (one per line)". Blank lines are ignored.</li>
+<li>Pick a Default Change Frequency, a Last modified option (Leave it out, Today or Pick a date) and a Default Priority. Whatever you choose is applied to every URL in the file.</li>
+<li>Click "Generate Sitemap" to build the XML.</li>
+<li>Use Copy, or Download to save it as sitemap.xml, then upload it to your site and submit its address in Google Search Console or add it to robots.txt with a Sitemap line.</li>
+</ol>
+<h2>Check these before you upload</h2>
+<p>By default the file has no &lt;lastmod&gt; at all. Today (your computer's clock, as a UTC date) and Pick a date put the same date on every URL, so choose one only if every page on the list really changed then. Google's documentation says it uses lastmod only when it is consistently and verifiably accurate, so a blanket date that is wrong for most pages works against you; for a mixed list, leave it out or edit the dates per URL afterward. Google also says it ignores changefreq and priority, so do not spend time tuning them.</p>
+<p>The tool does not remove duplicates, check that each address is absolute and on one host, or confirm that pages return 200 and are canonical and indexable. Clean the list first, because redirects, 404s and noindexed URLs in a sitemap send mixed signals. One file can hold up to 50,000 URLs or 50MB uncompressed; for more, split the list and use a sitemap index.</p>
+<p class="related">Related guide: <a href="https://seoprocheck.com/indexing-crawl/xml-sitemaps-complete-reference/">XML Sitemaps: The Complete Reference</a></p>
+</div>
+<!-- /spc-prose -->
 <footer class="site"><div class="wrap">
 Free SEO &amp; GEO tools by <a href="https://seoprocheck.com">SEO ProCheck</a> (seoprocheck.com) · Runs entirely in your browser · No sign-up
 </div></footer>
